@@ -7,4 +7,4 @@ PROGESCO Teams n'est pas un projet du GT informatique de la CNEAC, c'est un proj
 PROGESCO Teams est disponible pour Windows et Linux.
 Téléchargez la dernière version, cliquez sur **Assets** et choisissez votrze système d'exploitation. Téléchragez le fichier et lancez le.
 #### Utilisation "en ligne"
-Une version en ligne du projet sera bientôt disponible. Vous pourrez alors l'utiliser sur tous les appreils.
+Une version en ligne du projet est disponible sur [Heroku](https://progesco-teams.herokuapp.com/). Vous pourrez alors l'utiliser sur tous les appreils.
