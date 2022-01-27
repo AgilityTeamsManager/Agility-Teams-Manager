@@ -13,8 +13,11 @@
    </header>
    <main>
     <form action="/login" method="POST">
-     <input type="email" placeholder="Adresse mail" />
-     <input type="password" placeholder="Mot de passe" />
+     <input type="email" placeholder="Adresse mail" name="user" />
+     <input type="password" placeholder="Mot de passe" name="password" />
+     {% if error is defined %}
+      <p class="message">{{ error }}</p>
+     {% endif %}
      <input type="submit" value="Connexion" class="button1" />
     </form>
     <a href="/signup" class="button2">S'inscrire</a>

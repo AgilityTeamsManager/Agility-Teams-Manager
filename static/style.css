@@ -12,7 +12,6 @@ body {
 
 body.small {
   width: 350px;
-  height: 450px;
 }
 
 header {
@@ -32,10 +31,42 @@ h2 {
   color: gray;
 }
 
+input::placeholder {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+}
+
 input {
   margin-top: 5px;
-  width: 345px;
   border: 1px solid gray;
   border-radius: 7px;
-  height: 40px;
+  width: 335px;
+  height: 20px;
+  padding: 5px;
+  box-sizing: content-box;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+}
+
+.button1, .button2 {
+  margin-top: 5px;
+  display: block;
+  border: none;
+  background-color: #4c8aed;
+  color: white;
+  text-decoration: none;
+  width: 335px;
+  padding: 5px;
+  height: 20px;
+  border-radius: 7px;
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+}
+
+p.message {
+  text-align: center;
+  margin: 0;
+  margin-top: 5px;
+  color: red;
+  font-family: 'Open Sans', sans-serif;
 }
