@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+ <html>
+  <head>
+   <title>PROGESCO Teams - Connexion</title>
+   <meta charset="utf-8" />
+   <style>
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Open+Sans&display=swap');
+
+body {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+body.small {
+  width: 350px;
+}
+
+header {
+  border-bottom: 1px solid gray;
+}
+
+h1 {
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  margin-bottom: 5px;
+}
+
+h2 {
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  color: gray;
+}
+
+input::placeholder {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+}
+
+input {
+  margin-top: 5px;
+  border: 1px solid gray;
+  border-radius: 7px;
+  width: 335px;
+  height: 20px;
+  padding: 5px;
+  box-sizing: content-box;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+}
+
+.button1, .button2 {
+  margin-top: 5px;
+  display: block;
+  border: none;
+  background-color: #4c8aed;
+  color: white;
+  text-decoration: none;
+  width: 335px;
+  padding: 5px;
+  height: 20px;
+  border-radius: 7px;
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+}
+
+p.message {
+  text-align: center;
+  margin: 0;
+  margin-top: 5px;
+  color: red;
+  font-family: 'Open Sans', sans-serif;
+}
+   </style>
+  </head>
+  <body class="small">
+   <header>
+    <h1>PROGESCO Teams</h1>
+    <h2>Classements par équipe pour PROGESCO</h2>
+   </header>
+   <main>
+    <form action="/login" method="POST">
+     <input type="email" placeholder="Adresse mail" name="user" />
+     <input type="password" placeholder="Mot de passe" name="password" />
+     {% if error is defined %}
+      <p class="message">{{ error }}</p>
+     {% endif %}
+     <input type="submit" value="Connexion" class="button1" />
+     <button formaction="/account/signup" class="button2">S'inscrire</a>
+    </form>
+   </main>
+  </body>
+ </html>
+<!-- END -->
