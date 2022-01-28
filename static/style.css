@@ -36,7 +36,7 @@ input::placeholder {
   font-size: 16px;
 }
 
-input {
+input, button {
   margin-top: 5px;
   border: 1px solid gray;
   border-radius: 7px;
