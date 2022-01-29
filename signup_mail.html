@@ -76,6 +76,11 @@ p.message {
   color: red;
   font-family: 'Open Sans', sans-serif;
 }
+
+a {
+  color: white !important;
+  width: 100% !important;
+}
    </style>
   </head>
   <body class="small">
@@ -84,15 +89,10 @@ p.message {
     <h2>Classements par équipe pour PROGESCO</h2>
    </header>
    <main>
-    <form action="/login" method="POST">
-     <input type="email" placeholder="Adresse mail" name="user" />
-     <input type="password" placeholder="Mot de passe" name="password" />
-     {% if error is defined %}
-      <p class="message">{{ error }}</p>
-     {% endif %}
-     <input type="submit" value="Connexion" class="button1" />
-     <button formaction="/account/signup" class="button2">S'inscrire</a>
-    </form>
+    <p>
+     Pour finaliser la création de votre compte sur PROGESCO Teams, cliquez sur le boutton "Confirmer l'inscription" ou ouvrez le lien suivant : @link.
+    </p>
+    <a href="@link" class="button1">Confirmer l'inscription</a>
    </main>
   </body>
  </html>

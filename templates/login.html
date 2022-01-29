@@ -18,6 +18,9 @@
      {% if error is defined %}
       <p class="message">{{ error }}</p>
      {% endif %}
+     {% if request.args.get('message', False) %}
+      <p>{{ request.args.get('message') }}</p>
+     {% endif %}
      <input type="submit" value="Connexion" class="button1" />
      <button formaction="/account/signup" class="button2">S'inscrire</a>
     </form>

@@ -23,9 +23,6 @@ with open("data/users.csv") as f:
     for row in passwords_file:
         users[row[0]] = row[1]
 
-smtp_server: smtplib.SMTP_SSL = smtplib.SMTP_SSL("smtp.gmail.com", 465)
-smtp_server.login("progesco.teams@gmail.com", os.environ["SECRET_GMAIL"])
-
 signups: dict[str, dict[str, str]] = {}
 
 app.secret_key = os.environ["SECRET_KEY"]
@@ -56,7 +53,12 @@ def signup_confirm(id_confirm):
     """
     Confirm signup.
     """
-    
+    entry: dict[str, str] = signups[str(id_confirm)]
+    # Add to CSV file
+    with open("data/users.csv", "a") as file:
+        writer: _csv.writer = csv.writer(file)
+        writer.writerow([entry["user"], hashlib.sha256(entry["password"].encode()).hexdigest()])
+    return redirect("/login?message=Inscription réussie")
 
 
 @app.route("/account/signup", methods=["POST"])
@@ -66,7 +68,7 @@ def signup():
 
     Send an email.
     """
-    random_uuid: str = uuid.uuid4().hex
+    random_uuid: str = str(uuid.uuid4())
     signups[random_uuid] = {"user": request.form["user"], "password": hashlib.sha256(request.form["password"].encode()).hexdigest()}
     mail = email.mime.multipart.MIMEMultipart("alternative")
     mail["Subject"] = "PROGESCO Teams - Confirmer l'inscription"
@@ -75,8 +77,11 @@ def signup():
     confirm_url: str = request.url_root + "account/signup/" + random_uuid
     mail.attach(email.mime.text.MIMEText(f"Suivez ce lien pour confirmer votre inscription : {confirm_url}", "plain"))
     with open("signup_mail.html") as file:
-        mail.attach(email.mime.text.MIMEText(file.read(), "html"))
+        mail.attach(email.mime.text.MIMEText(file.read().replace("@link", confirm_url), "html"))
+    smtp_server: smtplib.SMTP_SSL = smtplib.SMTP_SSL("smtp.gmail.com", 465)
+    smtp_server.login("progesco.teams@gmail.com", os.environ["SECRET_GMAIL"])
     smtp_server.sendmail("progesco.teams@gmail.com", request.form["user"], mail.as_string())
+    smtp_server.close()
     return render_template("signup.html")
 
 

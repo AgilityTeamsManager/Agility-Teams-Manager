@@ -63,10 +63,13 @@ input, button {
   font-family: 'Open Sans', sans-serif;
 }
 
-p.message {
+p {
   text-align: center;
   margin: 0;
   margin-top: 5px;
-  color: red;
   font-family: 'Open Sans', sans-serif;
+}
+
+p.message {
+  color: red;
 }
