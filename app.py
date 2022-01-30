@@ -82,7 +82,7 @@ def signup():
     smtp_server.login("progesco.teams@gmail.com", os.environ["SECRET_GMAIL"])
     smtp_server.sendmail("progesco.teams@gmail.com", request.form["user"], mail.as_string())
     smtp_server.close()
-    return render_template("signup.html")
+    return render_template("signup.html", mail_address=request.form["user"])
 
 
 @app.route("/manifest.json")
