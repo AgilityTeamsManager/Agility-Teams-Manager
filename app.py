@@ -54,10 +54,14 @@ def signup_confirm(id_confirm):
     Confirm signup.
     """
     entry: dict[str, str] = signups[str(id_confirm)]
+    if entry["user"] in users:
+        return render_template("login.html", error=f"Le compte {entry['user']} existe dèjà.")
     # Add to CSV file
     with open("data/users.csv", "a") as file:
         writer: _csv.writer = csv.writer(file)
-        writer.writerow([entry["user"], hashlib.sha256(entry["password"].encode()).hexdigest()])
+        hashed: str = hashlib.sha256(entry["password"].encode()).hexdigest()
+        writer.writerow([entry["user"], hashed])
+        users[entry["user"]] = hashed
     return redirect("/login?message=Inscription réussie")
 
 
@@ -68,6 +72,8 @@ def signup():
 
     Send an email.
     """
+    if request.form["user"] in users:
+        return render_template("login.html", error=f"Le compte {request.form['user']} existe dèjà.")
     random_uuid: str = str(uuid.uuid4())
     signups[random_uuid] = {"user": request.form["user"], "password": hashlib.sha256(request.form["password"].encode()).hexdigest()}
     mail = email.mime.multipart.MIMEMultipart("alternative")
