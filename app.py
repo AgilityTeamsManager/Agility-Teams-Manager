@@ -14,7 +14,7 @@ import os
 import smtplib
 import uuid
 
-from flask import Flask, render_template, redirect, request, session
+from flask import abort, Flask, render_template, redirect, request, session
 
 app = Flask(__name__)
 users: dict[str, str] = {}
@@ -24,8 +24,34 @@ with open("data/users.csv") as f:
         users[row[0]] = row[1]
 
 signups: dict[str, dict[str, str]] = {}
+password_resets: dict[str, str] = {}
 
 app.secret_key = os.environ["SECRET_KEY"]
+
+
+def send_mail(to: str, subject: str, message: str, mail_message: str, redirect: str) -> None:
+    """
+    Send a PROGESCO Teams mail.
+
+    :param str to: Destination address.
+    :param str subject: Mail subject.
+    :param str message: Text message.
+    :param str mail_message: Message for HTML part.
+    :param str redirect: Redirect link in mail.
+    :return: Nothing.
+    :rtype: None
+    """
+    mail: email.mime.multipart.MIMEMultipart = email.mime.multipart.MIMEMultipart("alternative")
+    mail["Subject"] = subject
+    mail["From"] = "PROGESCO Teams<progesco.teams@gmail.com>"
+    mail["To"] = to
+    mail.attach(email.mime.text.MIMEText(message.format(redirect=redirect), "plain"))
+    with open("mail.html") as file_object:
+        mail.attach(email.mime.text.MIMEText(file_object.read().replace("@message", mail_message).replace("@link", redirect), "html"))
+    smtp_server: smtplib.SMTP_SSL = smtplib.SMTP_SSL("smtp.gmail.com", 465)
+    smtp_server.login("progesco.teams@gmail.com", os.environ["SECRET_GMAIL"])
+    smtp_server.sendmail("progesco.teams@gmail.com", to, mail.as_string())
+    smtp_server.close()
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -54,12 +80,13 @@ def signup_confirm(id_confirm):
     Confirm signup.
     """
     entry: dict[str, str] = signups[str(id_confirm)]
+    print(entry)
     if entry["user"] in users:
         return render_template("login.html", error=f"Le compte {entry['user']} existe dèjà.")
     # Add to CSV file
     with open("data/users.csv", "a") as file:
         writer: _csv.writer = csv.writer(file)
-        hashed: str = hashlib.sha256(entry["password"].encode()).hexdigest()
+        hashed: str = entry["password"]
         writer.writerow([entry["user"], hashed])
         users[entry["user"]] = hashed
     return redirect("/login?message=Inscription réussie")
@@ -76,19 +103,52 @@ def signup():
         return render_template("login.html", error=f"Le compte {request.form['user']} existe dèjà.")
     random_uuid: str = str(uuid.uuid4())
     signups[random_uuid] = {"user": request.form["user"], "password": hashlib.sha256(request.form["password"].encode()).hexdigest()}
-    mail = email.mime.multipart.MIMEMultipart("alternative")
-    mail["Subject"] = "PROGESCO Teams - Confirmer l'inscription"
-    mail["From"] = "progesco.teams@gmail.com"
-    mail["To"] = request.form["user"]
-    confirm_url: str = request.url_root + "account/signup/" + random_uuid
-    mail.attach(email.mime.text.MIMEText(f"Suivez ce lien pour confirmer votre inscription : {confirm_url}", "plain"))
-    with open("signup_mail.html") as file:
-        mail.attach(email.mime.text.MIMEText(file.read().replace("@link", confirm_url), "html"))
-    smtp_server: smtplib.SMTP_SSL = smtplib.SMTP_SSL("smtp.gmail.com", 465)
-    smtp_server.login("progesco.teams@gmail.com", os.environ["SECRET_GMAIL"])
-    smtp_server.sendmail("progesco.teams@gmail.com", request.form["user"], mail.as_string())
-    smtp_server.close()
+    send_mail(request.form["user"],
+              "PROGESCO Teams: Confirmer l'inscription",
+              "Ouvrez le lien suivant pour confirmer votre inscription : {redirect}",
+              "Pour finaliser la création de votre compte sur PROGESCO Teams, cliquez sur le boutton \"Confirmer l'inscription\" ou ouvrez le lien suivant : @link.",
+              request.url_root + "account/signup/" + random_uuid)
     return render_template("signup.html", mail_address=request.form["user"])
+
+
+@app.route("/account/reset", methods=["GET", "POST"])
+def reset():
+    if request.method == "POST":
+        if request.form["user"] not in users:
+            return render_template("reset.html", error=f"Le compte {request.form['user']} n'existe pas.")
+        random_uuid: str = str(uuid.uuid4())
+        password_resets[random_uuid] = request.form["user"]
+        send_mail(request.form["user"],
+                  "PROGESCO Teams: Réinitialiser le mot de passe",
+                  "Ouvrez le lien suivant pour réinitialiser votre mot de passe : {redirect}",
+                  "Pour réinitialiser votre mot de passe, cliquez sur le boutton \"Réinitialiser le mot de passe\" ou ouvrez le lien suivant : @link.",
+                  request.url_root + "account/reset/" + random_uuid
+        )
+        return render_template("signup.html", mail_address=request.form["user"])
+    return render_template("reset.html")
+
+
+@app.route("/account/reset/<uuid:id_reset>", methods=["GET", "POST"])
+def reset_password(id_reset):
+    """
+    Reset account, link from mail.
+
+    Page '/account/reset/<uuid:id_reset>'.
+    """
+    id_reset: str = str(id_reset)
+    if request.method == "POST":
+        print(password_resets)
+        if id_reset not in password_resets:
+            return abort(404)
+        mail: str = password_resets[id_reset]
+        if mail not in users:
+            return render_template("login.html", error=f"Le compte {mail} n'existe pas.")
+        users[mail] = hashlib.sha256(request.form["password"].encode()).hexdigest()
+        with open("data/users.csv", "w") as file:
+            writer: _csv.writer = csv.writer(file)
+            writer.writerows(users.items())
+        return redirect("/login?message=Nouveau mot de passe enregistré.")
+    return render_template("reset_password.html")
 
 
 @app.route("/manifest.json")
