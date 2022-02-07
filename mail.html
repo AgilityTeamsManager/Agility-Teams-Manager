@@ -92,8 +92,23 @@ a.full-width {
     <p>
      @message
     </p>
-    <a href="@link" class="button1 full-width">Confirmer l'inscription</a>
+    <a href="@link" class="button1 full-width">@button</a>
    </main>
+   <script type="application/ld+json">
+     {
+  "@context": "http://schema.org",
+  "@type": "EmailMessage",
+  "potentialAction": {
+    "@type": "ConfirmAction",
+    "name": "@button",
+    "handler": {
+      "@type": "HttpActionHandler",
+      "url": "@link"
+    }
+  },
+  "description": "@message"
+}
+   </script>
   </body>
  </html>
 <!-- END -->

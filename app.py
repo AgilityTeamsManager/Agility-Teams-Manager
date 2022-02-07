@@ -106,7 +106,7 @@ def signup():
     send_mail(request.form["user"],
               "PROGESCO Teams: Confirmer l'inscription",
               "Ouvrez le lien suivant pour confirmer votre inscription : {redirect}",
-              "Pour finaliser la création de votre compte sur PROGESCO Teams, cliquez sur le boutton \"Confirmer l'inscription\" ou ouvrez le lien suivant : @link.",
+              "Pour finaliser la création de votre compte sur PROGESCO Teams, cliquez sur le boutton 'Confirmer l'inscription' ou ouvrez le lien suivant : @link.",
               request.url_root + "account/signup/" + random_uuid)
     return render_template("signup.html", mail_address=request.form["user"])
 
