@@ -47,7 +47,9 @@ def send_mail(to: str, subject: str, message: str, mail_message: str, redirect: 
     mail["To"] = to
     mail.attach(email.mime.text.MIMEText(message.format(redirect=redirect), "plain"))
     with open("mail.html") as file_object:
-        mail.attach(email.mime.text.MIMEText(file_object.read().replace("@message", mail_message).replace("@link", redirect), "html"))
+        mail_html: str = file_object.read().replace("@message", mail_message).replace("@link", redirect)
+        print(mail_html)
+        mail.attach(email.mime.text.MIMEText(mail_html, "html"))
     smtp_server: smtplib.SMTP_SSL = smtplib.SMTP_SSL("smtp.gmail.com", 465)
     smtp_server.login("progesco.teams@gmail.com", os.environ["SECRET_GMAIL"])
     smtp_server.sendmail("progesco.teams@gmail.com", to, mail.as_string())
