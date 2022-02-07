@@ -29,7 +29,7 @@ password_resets: dict[str, str] = {}
 app.secret_key = os.environ["SECRET_KEY"]
 
 
-def send_mail(to: str, subject: str, message: str, mail_message: str, redirect: str) -> None:
+def send_mail(to: str, subject: str, message: str, mail_message: str, redirect: str, button: str) -> None:
     """
     Send a PROGESCO Teams mail.
 
@@ -38,6 +38,7 @@ def send_mail(to: str, subject: str, message: str, mail_message: str, redirect: 
     :param str message: Text message.
     :param str mail_message: Message for HTML part.
     :param str redirect: Redirect link in mail.
+    :param str button: Button's text.
     :return: Nothing.
     :rtype: None
     """
@@ -47,7 +48,7 @@ def send_mail(to: str, subject: str, message: str, mail_message: str, redirect: 
     mail["To"] = to
     mail.attach(email.mime.text.MIMEText(message.format(redirect=redirect), "plain"))
     with open("mail.html") as file_object:
-        mail_html: str = file_object.read().replace("@message", mail_message).replace("@link", redirect)
+        mail_html: str = file_object.read().replace("@message", mail_message).replace("@link", redirect).replace("@button", button)
         print(mail_html)
         mail.attach(email.mime.text.MIMEText(mail_html, "html"))
     smtp_server: smtplib.SMTP_SSL = smtplib.SMTP_SSL("smtp.gmail.com", 465)
@@ -109,7 +110,8 @@ def signup():
               "PROGESCO Teams: Confirmer l'inscription",
               "Ouvrez le lien suivant pour confirmer votre inscription : {redirect}",
               "Pour finaliser la création de votre compte sur PROGESCO Teams, cliquez sur le boutton 'Confirmer l'inscription' ou ouvrez le lien suivant : @link.",
-              request.url_root + "account/signup/" + random_uuid)
+              request.url_root + "account/signup/" + random_uuid,
+              "Confirmer l'inscription")
     return render_template("signup.html", mail_address=request.form["user"])
 
 
@@ -124,7 +126,8 @@ def reset():
                   "PROGESCO Teams: Réinitialiser le mot de passe",
                   "Ouvrez le lien suivant pour réinitialiser votre mot de passe : {redirect}",
                   "Pour réinitialiser votre mot de passe, cliquez sur le boutton \"Réinitialiser le mot de passe\" ou ouvrez le lien suivant : @link.",
-                  request.url_root + "account/reset/" + random_uuid
+                  request.url_root + "account/reset/" + random_uuid,
+                  "Réinitialiser le mot de passe"
         )
         return render_template("signup.html", mail_address=request.form["user"])
     return render_template("reset.html")
