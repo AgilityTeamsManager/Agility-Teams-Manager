@@ -57,8 +57,20 @@ def send_mail(to: str, subject: str, message: str, mail_message: str, redirect: 
     smtp_server.close()
 
 
-@app.route("/login", methods=["GET", "POST"])
+@app.route("/")
 def index():
+    """
+    Main page.
+
+    Redirects to app or login screen.
+    """
+    if "auth" in session and session["auth"] == "true":
+        return redirect("/app")
+    return redirect("/login")
+
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
     """
     Main app page.
 
