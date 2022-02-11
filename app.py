@@ -11,10 +11,20 @@ import email.mime.multipart
 import email.mime.text
 import hashlib
 import os
+import pickle
 import smtplib
+import sys
+import logging
 import uuid
 
 from flask import abort, Flask, render_template, redirect, request, session
+import coloredlogs
+
+os.environ["COLOREDLOGS_LOG_FORMAT"] = "%(asctime)s: [%(module)-15s] %(message)s"
+coloredlogs.install(level=logging.INFO)
+logging.basicConfig(format=os.environ["COLOREDLOGS_LOG_FORMAT"], level=logging.INFO)
+
+import pyprogesco
 
 app = Flask(__name__)
 users: dict[str, str] = {}
@@ -27,6 +37,9 @@ signups: dict[str, dict[str, str]] = {}
 password_resets: dict[str, str] = {}
 
 app.secret_key = os.environ["SECRET_KEY"]
+app.logger = logging.getLogger(__name__)
+
+calendar: pyprogesco.Calendar = pyprogesco.calendar
 
 
 def send_mail(to: str, subject: str, message: str, mail_message: str, redirect: str, button: str) -> None:
@@ -104,6 +117,10 @@ def signup_confirm(id_confirm):
         hashed: str = entry["password"]
         writer.writerow([entry["user"], hashed])
         users[entry["user"]] = hashed
+    # Make data directory
+    datadir: str = "data/" + entry["user"] + "/"
+    os.mkdir(datadir)
+    pickle.dump({}, open(datadir + "competitions.dat", "wb"))
     return redirect("/login?message=Inscription réussie")
 
 
@@ -176,6 +193,30 @@ def manifest():
     Redirects to static path.
     """
     return redirect("/static/manifest.json", 301)
+
+
+@app.route("/app")
+def main_app():
+    """
+    Main app page.
+
+    List of competitions.
+    """
+    return render_template("main_app.html", competitions=())
+
+
+@app.route("/app/new")
+def app_new():
+    """
+    New competition page.
+
+    Make a new competition.
+    """
+    return render_template("app_new.html", competitions=calendar.events["Agility"],
+                           months={1: "Janvier", 2: "Février", 3: "Mars", 4: "Avril", 5: "Mai",
+                                   6: "Juin", 7: "Juillet", 8: "Aout", 9: "Septembre",
+                                   10: "Octobre", 11: "Novembre", 12: "Décembre"}
+                           )
 
 
 if __name__ == "__main__":

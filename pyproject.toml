@@ -8,6 +8,11 @@ license = "GPL-3.0-or-later"
 [tool.poetry.dependencies]
 python = "^3.9"
 Flask = "^2.0.2"
+requests = "^2.27.1"
+beautifulsoup4 = "^4.10.0"
+lxml = "^4.7.1"
+dateparser = "^1.1.0"
+coloredlogs = "^15.0.1"
 
 [tool.poetry.dev-dependencies]
 requests = {extras = ["security"], version = "^2.27.1"}
