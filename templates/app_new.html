@@ -1,8 +1,9 @@
 {% extends "app.html" %}
 {% block title %}Nouveau concours{% endblock %}
+{% block link %}<script src="/static/scripts/form-link.js" defer></script>{% endblock %}
 {% block main %}
 <main>
- <form action="" method="POST">
+ <!-- <form action="" method="POST">
   <div>
    <input type="text" name="name" placeholder="Nom du concours" />
    <input type="date" name="date" placeholder="Date du concours" />
@@ -23,6 +24,10 @@ Utiliser la version hors-ligne (PROGESCO)
   <p class="infobox">
 Vous devez aussi enregistrer votre concours sur sportscanins pour utiliser le logiciel. Utilisez cette interface uniquement pour gérer le système "par&nbsp;équipes".
   </p>
+ </form> -->
+ <form id="form-link" method="POST">
+  <input type="text" name="name" placeholder="Nom du concours" />
+  <input type="file" name="image" />
  </form>
  <div>
   {% for month in competitions %}
@@ -30,7 +35,7 @@ Vous devez aussi enregistrer votre concours sur sportscanins pour utiliser le lo
     <summary>{{ months[month] }}</summary>
     <div class="list">
      {% for competition in competitions[month] %}
-      <div>
+      <a href="/app/new/{{ competition.id }}">
        <div>{{ competition.type }}</div>
        <div>
         <div>{{ competition.club }}</div>
@@ -39,7 +44,7 @@ Vous devez aussi enregistrer votre concours sur sportscanins pour utiliser le lo
        <div>
         {{ competition.day }}
        </div>
-      </div>
+      </a>
      {% endfor %}
     </div>
    </details>

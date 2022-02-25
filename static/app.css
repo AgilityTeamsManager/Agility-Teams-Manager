@@ -18,6 +18,10 @@
  */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Open+Sans&display=swap');
 
+:root {
+  font-family: "Open Sans", sans-serif;
+}
+
 body {
   position: absolute;
   top: 50%; 
@@ -106,13 +110,11 @@ header .button .material-icons {
 
 main {
   padding: 5px;
-  display: flex;
   height: calc(100% - 70px);
+  overflow-y: auto;
 }
 
 main > * {
-  flex-basis: 0;
-  flex-grow: 1;
   margin: 3px;
   overflow-y: auto;
   overflow-x: hidden;
@@ -188,6 +190,7 @@ summary {
   font-size: 20px;
   font-weight: bold;
   margin-bottom: 3px;
+  user-select: none;
 }
 
 details {
@@ -200,6 +203,42 @@ div.list {
   border-radius: 5px;
 }
 
-div.list > div {
+div.list > a {
   border-bottom: 1px solid gray;
+  display: flex;
+  padding: 5px;
+  height: 42px;
+  text-decoration: none;
+  color: black;
+}
+
+div.list > a > div:nth-child(1) {
+  border: 1px solid gray;
+  border-radius: 5px;
+  width: 40px;
+  height: 40px;
+  background-color: lightgray;
+  text-align: center;
+  line-height: 40px;
+}
+div.list > a > div:nth-child(2) {
+  flex-grow: 1;
+  padding: 0 5px;
+}
+
+div.list > a > div:nth-child(2) > div:nth-child(1) {
+  font-weight: bold;
+}
+
+div.list > a > div:nth-child(2) > div:nth-child(2) {
+  color: gray;
+  font-size: 15px;
+}
+
+div.list > a:last-child {
+  border-bottom: none;
+}
+
+div.list > a:hover {
+  background-color: lightgray;
 }

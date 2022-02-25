@@ -5,7 +5,20 @@
 {% block button %}<a href="/app/new" class="button green"><span class="material-icons">add</span></a>{% endblock %}
 {% block main %}
 {% if competitions|length > 0 %}
-Loading...
+<div class="list">
+ {% for competition in competitions %}
+  <a href="/app/{{ competition['id'] }}/">
+   <div>
+    <img src="{{ competition['image'] }}" />
+   </div>
+   <div>
+    <div>{{ competition['name'] }}</div>
+    <div>{{ competition['date'] }}</div>
+   </div>
+   <div>{{ competition['type'] }}</div>
+  </a>
+ {% endfor %}
+</div>
 {% else %}
 <p>Aucun concours.</p>
 {% endif %}

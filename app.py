@@ -41,6 +41,8 @@ app.logger = logging.getLogger(__name__)
 
 calendar: pyprogesco.Calendar = pyprogesco.calendar
 
+user_data: dict[str, list[int]] = pickle.load(open("data/data.dat", "rb"))
+
 
 def send_mail(to: str, subject: str, message: str, mail_message: str, redirect: str, button: str) -> None:
     """
@@ -77,7 +79,7 @@ def index():
 
     Redirects to app or login screen.
     """
-    if "auth" in session and session["auth"] == "true":
+    if "auth" in session and session["auth"] != "false":
         return redirect("/app")
     return redirect("/login")
 
@@ -93,7 +95,7 @@ def login():
         # Check password
         if request.form["user"] in users:
             if hashlib.sha256(request.form["password"].encode()).hexdigest() == users[request.form["user"]]:
-                session["auth"] = "true"
+                session["auth"] = request.form["user"]
                 return redirect("/app")
             else:
                 return render_template("login.html", error="Mauvais mot de passe")
@@ -119,8 +121,13 @@ def signup_confirm(id_confirm):
         users[entry["user"]] = hashed
     # Make data directory
     datadir: str = "data/" + entry["user"] + "/"
-    os.mkdir(datadir)
+    try:
+        os.mkdir(datadir)
+    except FileExistsError:
+        pass
     pickle.dump({}, open(datadir + "competitions.dat", "wb"))
+    user_data[entry["user"]] = []
+    pickle.dump(user_data, open("data/data.dat", "wb"))
     return redirect("/login?message=Inscription réussie")
 
 
@@ -202,7 +209,14 @@ def main_app():
 
     List of competitions.
     """
-    return render_template("main_app.html", competitions=())
+    entry = user_data[session["auth"]]
+    competitions: list[dict[str, str]] = []
+    if len(entry):
+        for competition_id in entry:
+            datadir: str = "data/" + session["auth"] + "/" + str(competition_id) + "/info.dat"
+            data: dict[str, str] = pickle.load(open(datadir))
+            competitions.append(data)
+    return render_template("main_app.html", competitions=competitions)
 
 
 @app.route("/app/new")
@@ -219,5 +233,45 @@ def app_new():
                            )
 
 
+@app.route("/app/new/<int:id>", methods=["POST"])
+def app_new_competition(id: int):
+    """
+    Add a new competition.
+
+    From /app/new.
+
+    :param int id: Competition ID.
+    """
+    all_events: list = []
+    for events in calendar.events["Agility"].values():
+        all_events.extend(events)
+    print(all_events)
+    for e in all_events:
+        print(e.id)
+    selected_event = None
+    for event in all_events:
+        if event.id == id:
+            selected_event = event
+    try:
+        os.mkdir("data/" + session["auth"] + "/" + str(id))
+        with open("data/" + session["auth"] + "/" + str(id) + "/info.dat", "bw") as file:
+            pickle.dump({
+                "id": event.id,
+                "date": event.day,
+                "type": event.type,
+                "name": request.form["name"],
+                "image": request.files["image"].stream.read()
+            }, file)
+    except FileExistsError:
+        pass
+    if id not in user_data[session["auth"]]:
+        if user_data[session["auth"]]:
+            user_data[session["auth"]].append(id)
+        else:
+            user_data[session["auth"]] = [id]
+    pickle.dump(user_data, open("data/data.dat", "wb"))
+    return abort(500)
+
+
 if __name__ == "__main__":
-    app.run(host="localhost", port=8080, debug=True)
+    app.run(host="localhost", port=8080, debug=False)
