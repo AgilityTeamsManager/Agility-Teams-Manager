@@ -100,6 +100,6 @@ class Calendar:
                 event.club = " ".join(main_cell[5].text.lstrip("\n ").replace("\n", "").split())
                 result[month].append(event)
                 link: ParseResult = urlparse(main_cell[5]["href"])
-                event.id = parse_qs(link.query)["IdConcours"][0]
+                event.id = int(parse_qs(link.query)["IdConcours"][0])
         logging.debug("Loading... Done.")
         return result

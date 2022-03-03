@@ -1,0 +1,55 @@
+{% extends "app.html" %}
+{% block title %}Nouveau concours{% endblock %}
+{% block link %}<script src="/static/scripts/form-link.js" defer></script>{% endblock %}
+{% block main %}
+<main>
+ <!-- <form action="" method="POST">
+  <div>
+   <input type="text" name="name" placeholder="Nom du concours" />
+   <input type="date" name="date" placeholder="Date du concours" />
+  </div>
+  <textarea placeholder="Petite description du concours" style="resize:none;"></textarea>
+  <div>
+   <input type="text" name="contact" placeholder="Nom du contact" />
+   <input type="tel" name="contact-tel" placeholder="Téléphone" pattern="[0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}" />
+  </div>
+  <input type="mail" name="mail" value="{{ session['auth'] }}" readonly />
+  <input type="url" name="sportscanins" placeholder="L'URL du concours sur sportscanins.fr" pattern="https://sportscanins\.fr/calendrier/concours_info\.php\?IdConcours=[0-9][0-9][0-9][0-9][0-9]" />
+  <label>
+   <input type="checkbox" name="offline" />
+Utiliser la version hors-ligne (PROGESCO)
+  </label>
+  <p>Utilisez cette option si vous n'aurez pas accès à Internet le jour du concours.</p>
+  <input type="submit" value="Créer le concours" class="button2 blue" />
+  <p class="infobox">
+Vous devez aussi enregistrer votre concours sur sportscanins pour utiliser le logiciel. Utilisez cette interface uniquement pour gérer le système "par&nbsp;équipes".
+  </p>
+ </form> -->
+ <form id="form-link" method="POST">
+  <input type="text" name="name" placeholder="Nom du concours" />
+  <input type="file" name="image" />
+ </form>
+ <div>
+  {% for month in competitions %}
+   <details>
+    <summary>{{ months[month] }}</summary>
+    <div class="list">
+     {% for competition in competitions[month] %}
+      <a href="/app/new/{{ competition.id }}">
+       <div>{{ competition.type }}</div>
+       <div>
+        <div>{{ competition.club }}</div>
+        <div>{{ competition.region }}</div>
+       </div>
+       <div>
+        {{ competition.day }}
+       </div>
+      </a>
+     {% endfor %}
+    </div>
+   </details>
+  {% endfor %}
+ </div>
+</main>
+{% endblock %}
+

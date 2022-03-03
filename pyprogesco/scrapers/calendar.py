@@ -48,7 +48,7 @@ class Calendar:
         :return: Nothing.
         :rtype: None
         """
-        self.events: dict[str, dict[int, list[Event]]] = {"Toutes": self.list_events("Toutes"),
+        """self.events: dict[str, dict[int, list[Event]]] = {"Toutes": self.list_events("Toutes"),
                                                           "Agility": self.list_events("Agility"),
                                                           "Flyball": self.list_events("Flyball"),
                                                           "Dog_Dancing": self.list_events("Dog_Dancing"),
@@ -58,7 +58,8 @@ class Calendar:
                                                           "Attelage": self.list_events("Attelage"),
                                                           "CAESC": self.list_events("CAESC"),
                                                           "Pass": self.list_events("Pass"),
-                                                          "Formation": self.list_events("Formation")}
+                                                          "Formation": self.list_events("Formation")}"""
+        self.events = {"Agility": self.list_events("Agility")}
 
     def list_events(self, activity: str = None, param_month: int = None) -> dict[int, list[Event]]:
         """
@@ -100,7 +101,7 @@ class Calendar:
                 event.region = main_cell[4].lstrip("\n-").strip()
                 event.club = " ".join(main_cell[5].text.lstrip("\n ").replace("\n", "").split())
                 link: ParseResult = urlparse(main_cell[5]["href"])
-                event.id = parse_qs(link.query)["IdConcours"][0]
+                event.id = int(parse_qs(link.query)["IdConcours"][0])
                 result[month].append(event)
         logging.debug("Loading... Done.")
         return result

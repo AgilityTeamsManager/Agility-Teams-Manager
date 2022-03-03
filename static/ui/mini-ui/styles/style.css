@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Open+Sans&display=swap');
+
+body {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+body.small {
+  width: 350px;
+}
+
+header {
+  border-bottom: 1px solid gray;
+}
+
+h1 {
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  margin-bottom: 5px;
+}
+
+h2 {
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  color: gray;
+}
+
+input::placeholder {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+}
+
+input, button {
+  margin-top: 5px;
+  border: 1px solid gray;
+  border-radius: 7px;
+  width: 335px;
+  height: 20px;
+  padding: 5px;
+  box-sizing: content-box;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+}
+
+.button1, .button2 {
+  margin-top: 5px;
+  display: block;
+  border: none;
+  background-color: #4c8aed;
+  color: white;
+  text-decoration: none;
+  width: 335px;
+  padding: 5px;
+  height: 20px;
+  border-radius: 7px;
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+}
+
+p {
+  text-align: center;
+  margin: 0;
+  margin-top: 5px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+p.message {
+  color: red;
+}

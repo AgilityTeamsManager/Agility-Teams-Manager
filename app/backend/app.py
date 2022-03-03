@@ -20,6 +20,9 @@ import uuid
 from flask import abort, Flask, render_template, redirect, request, session
 import coloredlogs
 
+from app.backend.account.root import login
+from app.backend.account.reset import reset, reset_password
+
 os.environ["COLOREDLOGS_LOG_FORMAT"] = "%(asctime)s: [%(module)-15s] %(message)s"
 coloredlogs.install(level=logging.INFO)
 logging.basicConfig(format=os.environ["COLOREDLOGS_LOG_FORMAT"], level=logging.INFO)
@@ -250,8 +253,11 @@ def app_new_competition(id: int):
         print(e.id)
     selected_event = None
     for event in all_events:
+        print(repr(id))
+        print(repr(event.id))
         if event.id == id:
             selected_event = event
+    print(selected_event)
     try:
         os.mkdir("data/" + session["auth"] + "/" + str(id))
         with open("data/" + session["auth"] + "/" + str(id) + "/info.dat", "bw") as file:
@@ -273,5 +279,11 @@ def app_new_competition(id: int):
     return abort(500)
 
 
+app.add_url_rule("/account/login", methods=["GET", "POST"], view_func=login)
+
+app.add_url_rule("/account/reset", view_func=reset)
+app.add_url_rule("/account/reset/<uuid:id_reset", view_func=reset_password)
+
+
 if __name__ == "__main__":
-    app.run(host="localhost", port=8080, debug=False)
+    app.run(host="localhost", port=8080, debug=True)
