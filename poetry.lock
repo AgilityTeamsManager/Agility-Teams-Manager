@@ -209,7 +209,7 @@ grpc = ["grpcio (>=1.0.0)"]
 name = "gunicorn"
 version = "20.1.0"
 description = "WSGI HTTP Server for UNIX"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.5"
 
@@ -509,7 +509,7 @@ watchdog = ["watchdog"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "06d567f5745b8ba5dad48a6aba267be3ffdf9d64af3695df6137f886259e0108"
+content-hash = "b351d80e0e4cf8d08d332bda6c19b1028c0bf66008da47151eab1b7b7fad799c"
 
 [metadata.files]
 beautifulsoup4 = [
