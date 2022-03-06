@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Agility Teams Manager - Common data module.
+Agility Teams Manager - Backend static functions.
 Copyright (C) 2022  Virinas-code
 
 This program is free software: you can redistribute it and/or modify
@@ -17,3 +17,26 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
+from flask import send_from_directory
+
+
+def public(filename: str):
+    """
+    Provides static files for public/ directory.
+
+    Page /public/<path:filename>.
+
+    :param str filename: File to get.
+    """
+    return send_from_directory("../../public/", filename)
+
+
+def static_ui(filename: str):
+    """
+    Provides static files for ui/ directory.
+
+    Page /ui/<path:filename>.
+
+    :param str filename: File to get.
+    """
+    return send_from_directory("../../ui/", filename)

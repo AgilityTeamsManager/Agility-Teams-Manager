@@ -8,10 +8,8 @@ body {
   border: 1px solid gray;
   border-radius: 5px;
   padding: 5px;
-}
-
-body.small {
   width: 350px;
+  height: 400px;
 }
 
 header {

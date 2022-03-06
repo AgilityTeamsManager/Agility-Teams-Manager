@@ -5,25 +5,25 @@ Agility Teams Manager - Backend: Account reset.
 
 Backend function to reset account password.
 """
-import _csv, csv
-import hashlib
 import uuid
 
-from flask import redirect, render_template, abort
+from flask import abort, redirect, render_template, request
 
-from app.backend.utils import send_mail
-import app.modules.common as common  # Global data
-from app.modules.data import save_users_data
+from app.utils import send_mail
+import app.common as common  # Global data
+
+
+password_resets: dict[str, str] = {}
 
 
 def reset():
     """
-    Handlemain account reset page.
+    Handle main account reset page.
 
     Page /account/reset.
     """
     if request.method == "POST":
-        if request.form["user"] not in common.users:
+        if request.form["user"] not in common.users.users:
             return render_template("reset.html", error=f"Le compte {request.form['user']} n'existe pas.")
         random_uuid: str = str(uuid.uuid4())
         password_resets[random_uuid] = request.form["user"]
@@ -49,7 +49,7 @@ def reset_password(id_reset):
         if id_reset not in password_resets:
             return abort(404)
         mail: str = password_resets[id_reset]
-        if mail not in users:
+        if mail not in common.users.data:
             return render_template("login.html", error=f"Le compte {mail} n'existe pas.")
         users[mail] = hashlib.sha256(request.form["password"].encode()).hexdigest()
         with open("data/users.csv", "w") as file:

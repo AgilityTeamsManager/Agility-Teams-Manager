@@ -19,6 +19,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 import hashlib
 import logging
+import os
 import pickle
 
 import app.data.models as models
@@ -56,7 +57,7 @@ class DataManager:
         with open("data/users.dat", "br") as file:
             parsed: dict[str, str] = pickle.load(file)
             self.users_data = parsed
-        users: dict[str, models.User] = []
+        users: dict[str, models.User] = {}
         for mail, password in parsed.items():
             user: models.User = models.User(mail, password)
             path: str = "data/" + mail + "/competitions.dat"
@@ -99,9 +100,13 @@ class DataManager:
         :param str password: User's password.
         :return: Nothing.
         """
-        logging.info("Creating user %(mail)s")
-        hashed_password: str = hashlib.sha256(password.encode).hexdigest()
+        logging.info("Creating user %(mail)s" % {"mail": mail})
+        hashed_password: str = hashlib.sha256(password.encode()).hexdigest()
         user: models.User = models.User(mail, hashed_password)
+        path: str = "data/" + mail + "/"
+        print(os.getcwd())
+        os.mkdir(path)
+        pickle.dump([], open(path + "competitions.dat", "bw"))
         self.users.append(user)
         self.users_data[mail] = hashed_password
         self.write_users_data()

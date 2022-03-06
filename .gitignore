@@ -130,3 +130,10 @@ dmypy.json
 
 # Vim cache files
 *.un~
+
+# Secret
+scripts/env.sh
+
+# Google API Secrets
+conf/token.json
+conf/credentials.json
