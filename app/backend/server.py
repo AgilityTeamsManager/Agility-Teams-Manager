@@ -19,6 +19,9 @@ from app.backend.account.signup import signup, signup_confirm
 ##from app.backend.account.reset import reset, reset_password
 from app.backend.static import public, static_ui
 from app.data import DataManager
+from app.utils import env_to_conf
+
+env_to_conf()
 
 from app.utils import main; main()
 

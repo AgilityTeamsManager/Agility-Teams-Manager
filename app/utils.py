@@ -43,9 +43,9 @@ def env_to_conf() -> None:
     :return: Nothing.
     """
     with open("conf/credentials.json") as file:
-        file.write(os.env["GOOGLE_CREDENTIALS"])
+        file.write(os.environ["GOOGLE_CREDENTIALS"])
     with open("conf/token.json") as file:
-        file.write(os.env["GOOGLE_TOKEN"])
+        file.write(os.environ["GOOGLE_TOKEN"])
 
 
 
