@@ -36,6 +36,19 @@ SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']
 print(os.getcwd())
 
 
+def env_to_conf() -> None:
+    """
+    Write secrets from environnement variables to conf/ path.
+
+    :return: Nothing.
+    """
+    with open("conf/credentials.json") as file:
+        file.write(os.env["GOOGLE_CREDENTIALS"])
+    with open("conf/token.json") as file:
+        file.write(os.env["GOOGLE_TOKEN"])
+
+
+
 def main():
     """
     Shows basic usage of the Gmail API.
