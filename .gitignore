@@ -141,3 +141,6 @@ conf/credentials.json
 # Secrets Config
 conf/gmail.json
 conf/app.json
+
+# Not public
+samples/
