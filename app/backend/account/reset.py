@@ -49,11 +49,9 @@ def reset_password(id_reset):
         if id_reset not in password_resets:
             return abort(404)
         mail: str = password_resets[id_reset]
-        if mail not in common.users.data:
+        if mail not in common.users.users:
             return render_template("login.html", error=f"Le compte {mail} n'existe pas.")
-        users[mail] = hashlib.sha256(request.form["password"].encode()).hexdigest()
-        with open("data/users.csv", "w") as file:
-            writer: _csv.writer = csv.writer(file)
-            writer.writerows(users.items())
+        common.users.add_user(mail, request.form["password"])
+        common.users.write_users_data()
         return redirect("/login?message=Nouveau mot de passe enregistré.")
     return render_template("reset_password.html")
