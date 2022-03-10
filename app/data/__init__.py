@@ -53,7 +53,7 @@ class DataManager:
         :return: List of users.
         :rtype: list[models.User]
         """
-        logging.info("Loading data...")
+        logging.info("Loading users data...")
         with open("data/users.dat", "br") as file:
             parsed: dict[str, str] = pickle.load(file)
             self.users_data = parsed
@@ -66,7 +66,7 @@ class DataManager:
                 user.competitions.append(self.load_competition(mail, competition))
             users[mail] = user
         self.users = users
-        logging.info("Loaded data.")
+        logging.info("Loaded users data.")
         return users
 
     def load_competition(self, mail: str, id_competition: int) -> models.Competition:
@@ -107,7 +107,7 @@ class DataManager:
         print(os.getcwd())
         os.mkdir(path)
         pickle.dump([], open(path + "competitions.dat", "bw"))
-        self.users.append(user)
+        self.users[mail] = user
         self.users_data[mail] = hashed_password
         self.write_users_data()
 
