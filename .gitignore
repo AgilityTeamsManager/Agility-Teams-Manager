@@ -137,3 +137,7 @@ scripts/env.sh
 # Google API Secrets
 conf/token.json
 conf/credentials.json
+
+# Secrets Config
+conf/gmail.json
+conf/app.json
