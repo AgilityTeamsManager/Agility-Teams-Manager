@@ -23,6 +23,11 @@ jobs:
         python -m pip install --upgrade pip
         pip install sphinx furo
     - name: Build documentation
+      env:
+        ATM_GMAIL_CLIENT_ID: 0
+        ATM_GMAIL_CLIENT_SECRET: 0
+        ATM_GMAIL_REFRESH_TOKEN: 0
+        ATM_APP_SECRET_KEY: 0
       run: |
         cd docs/
         make html
