@@ -3,6 +3,7 @@
 """
 PROGESCO Teams.
 
+
 Classements par équipe pour PROGESCO.
 """
 import logging
@@ -20,6 +21,7 @@ load_env_from_conf()
 
 from app.backend.account.login import login
 from app.backend.account.signup import signup, signup_confirm
+from app.backend.account.reset import reset, reset_password
 ##from app.backend.account.reset import reset, reset_password
 from app.backend.root import index
 from app.backend.static import public, static_ui
@@ -58,8 +60,11 @@ flask_app.add_url_rule("/account/signup/<uuid:id_confirm>",
                        view_func=signup_confirm)
 
 # Reset password
-##flask_app.add_url_rule("/account/reset", view_func=reset)
-##flask_app.add_url_rule("/account/reset/<uuid:id_reset", view_func=reset_password)
+flask_app.add_url_rule("/account/reset", view_func=reset,
+                       methods=["GET", "POST"])
+flask_app.add_url_rule("/account/reset/<uuid:id_reset>",
+                       view_func=reset_password,
+                       methods=["GET", "POST"])
 
 
 if __name__ == "__main__":

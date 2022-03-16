@@ -23,7 +23,7 @@ def reset():
     Page /account/reset.
     """
     if request.method == "POST":
-        if request.form["user"] not in common.users.users:
+        if request.form["user"] not in common.data.users:
             return render_template("reset.html", error=f"Le compte {request.form['user']} n'existe pas.")
         random_uuid: str = str(uuid.uuid4())
         password_resets[random_uuid] = request.form["user"]
@@ -33,9 +33,9 @@ def reset():
                   "Pour réinitialiser votre mot de passe, cliquez sur le boutton \"Réinitialiser le mot de passe\" ou ouvrez le lien suivant : @link.",
                   request.url_root + "account/reset/" + random_uuid,
                   "Réinitialiser le mot de passe"
-        )
-        return render_template("signup.html", mail_address=request.form["user"])
-    return render_template("reset.html")
+                )
+        return render_template("account/common/mail_received.html", mail_address=request.form["user"])
+    return render_template("account/reset/reset.html")
 
 
 def reset_password(id_reset):
@@ -51,7 +51,7 @@ def reset_password(id_reset):
         mail: str = password_resets[id_reset]
         if mail not in common.users.users:
             return render_template("login.html", error=f"Le compte {mail} n'existe pas.")
-        common.users.add_user(mail, request.form["password"])
+        common.users.set_user_password(mail, request.form["password"])
         common.users.write_users_data()
         return redirect("/login?message=Nouveau mot de passe enregistré.")
-    return render_template("reset_password.html")
+    return render_template("account/reset/reset_password.html")

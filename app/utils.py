@@ -46,7 +46,7 @@ def send_mail(to: str, subject: str, message: str, mail_message: str,
     mail["From"] = "PROGESCO Teams<progesco.teams@gmail.com>"
     mail["To"] = to
     mail.attach(email.mime.text.MIMEText(message.format(redirect=redirect), "plain"))
-    with open("mail.html") as file_object:
+    with open("app/frontend/mail.html") as file_object:
         mail_html: str = file_object.read().replace("@message", mail_message) \
                                            .replace("@link", redirect) \
                                            .replace("@button", button)

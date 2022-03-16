@@ -23,6 +23,8 @@ import os
 import pickle
 
 import app.data.models as models
+from app.utils import hash_password
+from modules.models.competition import Competition
 
 
 class DataManager:
@@ -62,8 +64,8 @@ class DataManager:
             user: models.User = models.User(mail, password)
             path: str = "data/" + mail + "/competitions.dat"
             competitions: list[int] = pickle.load(open(path, "br"))
-            for competition in competitions:
-                user.competitions.append(self.load_competition(mail, competition))
+            for competition, competition_id in competitions:
+                user.competitions[competition_id] = self.load_competition(mail, competition)
             users[mail] = user
         self.users = users
         logging.info("Loaded users data.")
@@ -81,13 +83,18 @@ class DataManager:
         :rtype: models.Competition
         """
         logging.debug("Loading competition %(id_competition)s for user %(mail)s")
-        competition: models.Competition = models.Competition(id_competition)
         path: str = "data/" + mail + "/" + str(id_competition) + "/info.dat"
         with open(path, "br") as file:
             data: dict[str, str] = pickle.load(file)
-            competition.name = data["name"]
-            competition.type = data["type"]
-            competition.date = data["date"]
+            compet_name: str = data["name"]
+            compet_image: str = data["image"]
+            compet_id: int = data["id"]
+            compet_type: str = data["type"]
+            compet_format: str = data["format"]
+            compet_day: str = data["day"]
+            compet_club: str = data["club"]
+        competition: Competition = Competition(compet_id, compet_type, compet_format, compet_day, compet_club)
+        competition.configure(compet_name, compet_image)
         return competition
 
     def add_user(self, mail: str, password: str) -> None:
@@ -106,10 +113,24 @@ class DataManager:
         path: str = "data/" + mail + "/"
         print(os.getcwd())
         os.mkdir(path)
-        pickle.dump([], open(path + "competitions.dat", "bw"))
+        pickle.dump({}, open(path + "competitions.dat", "bw"))
         self.users[mail] = user
         self.users_data[mail] = hashed_password
         self.write_users_data()
+
+    def set_user_password(self, mail: str, password: str) -> None:
+        """
+        Change an user password.
+
+        /!\\ This function performs hash on password.
+
+        :param str mail: User to change password.
+        :param str password: New password.
+        :return: Nothing, updates data.
+        """
+        new_password: str = hash_password(password)
+        self.users[mail].password = new_password
+        self.users_data[mail] = new_password
 
     def write_users_data(self) -> None:
         """
@@ -123,7 +144,14 @@ class DataManager:
         with open("data/users.dat", "bw") as file:
             pickle.dump(self.users_data, file)
 
-    def add_competition(self, mail: str, id_competition: int) -> None:
+    def add_competition(self, mail: str, id_competition: int,
+                        competition: modules.pyprogesco.scrapers.calendar.Event) -> None:
         """
         Add a new competition.
+
+        :param str mail: Competition manager's mail.
+        :param int id_competition: Competition ID on sportscanins.
+        :return: Nothing. Use user.competitions[].
         """
+        # We must have an unified model
+        self.users[mail].competitions[id_competition] = competition

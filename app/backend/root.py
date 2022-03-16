@@ -26,6 +26,6 @@ def index():
 
     Page /.
     """
-    if session.auth:
+    if "auth" in session:
         return redirect("/app")
     return redirect("/account/login")

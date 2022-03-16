@@ -31,4 +31,5 @@ class User:
         """
         self.mail: str = mail_address
         self.password: str = password
-        self.competitions: list[models.Competition] = []
+        self.competitions: dict[int, models.Competition] = {}
+        """Competitions by ID."""

@@ -59,4 +59,4 @@ def signup():
               "Pour finaliser la création de votre compte sur PROGESCO Teams, cliquez sur le boutton 'Confirmer l'inscription' ou ouvrez le lien suivant : @link.",
               request.url_root + "account/signup/" + random_uuid,
               "Confirmer l'inscription")
-    return render_template("account/root/signup.html", mail_address=request.form["user"])
+    return render_template("account/common/mail_received.html", mail_address=request.form["user"])
