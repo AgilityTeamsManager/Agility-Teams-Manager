@@ -1,6 +1,7 @@
-name: Pylint
+name: Publish doc
 
 on:
+  workflow_dispatch:
   push:
     paths:
       - "docs/"
