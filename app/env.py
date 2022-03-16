@@ -21,22 +21,23 @@ import json
 import os
 
 
-def load_env_from_conf() -> None:
+def load_env_from_conf(prefix: str = "") -> None:
     """
     Load environnement variables from conf/ folder.
 
+    :param str prefix: Prefix before paths.
     :return: Nothing, sets environnement variables.
     """
     if "ATM_GMAIL_CLIENT_ID" not in os.environ or \
         "ATM_GMAIL_CLIENT_SECRET" not in os.environ or \
             "ATM_GMAIL_REFRESH_TOKEN" not in os.environ:
         # GMail variables not found!
-        with open("conf/gmail.json") as gmail_conf:
+        with open(prefix + "conf/gmail.json") as gmail_conf:
             parsed: dict[str, str] = json.load(gmail_conf)
             os.environ["ATM_GMAIL_CLIENT_ID"] = parsed["client_id"]
             os.environ["ATM_GMAIL_CLIENT_SECRET"] = parsed["client_secret"]
             os.environ["ATM_GMAIL_REFRESH_TOKEN"] = parsed["refresh_token"]
     if "ATM_APP_SECRET_KEY" not in os.environ:
-        with open("conf/app.json") as app_conf:
+        with open(prefix + "conf/app.json") as app_conf:
             parsed: dict[str, str] = json.load(app_conf)
             os.environ["ATM_APP_SECRET_KEY"] = parsed["secret_key"]
