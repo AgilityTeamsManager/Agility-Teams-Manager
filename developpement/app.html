@@ -200,19 +200,169 @@
 </section>
 <section id="account">
 <h3>Account<a class="headerlink" href="#account" title="Lien permanent vers ce titre">#</a></h3>
-<section id="login">
-<h4>Login<a class="headerlink" href="#login" title="Lien permanent vers ce titre">#</a></h4>
+<section id="module-app.backend.account.login">
+<span id="login"></span><h4>Login<a class="headerlink" href="#module-app.backend.account.login" title="Lien permanent vers ce titre">#</a></h4>
+<p>Backend for login.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="app.backend.account.login.login">
+<span class="sig-prename descclassname"><span class="pre">app.backend.account.login.</span></span><span class="sig-name descname"><span class="pre">login</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.backend.account.login.login" title="Lien permanent vers cette définition">#</a></dt>
+<dd><p>Login page.</p>
+<p>Page /account/login, methods GET and POST.</p>
+</dd></dl>
 </section>
-<section id="signup">
-<h4>Signup<a class="headerlink" href="#signup" title="Lien permanent vers ce titre">#</a></h4>
+<section id="module-app.backend.account.signup">
+<span id="signup"></span><h4>Signup<a class="headerlink" href="#module-app.backend.account.signup" title="Lien permanent vers ce titre">#</a></h4>
+<p>Backend for signup.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="app.backend.account.signup.signup">
+<span class="sig-prename descclassname"><span class="pre">app.backend.account.signup.</span></span><span class="sig-name descname"><span class="pre">signup</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.backend.account.signup.signup" title="Lien permanent vers cette définition">#</a></dt>
+<dd><p>Signup. Send an email.</p>
+<p>Page /account/signup, methods POST.</p>
+</dd></dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="app.backend.account.signup.signup_confirm">
+<span class="sig-prename descclassname"><span class="pre">app.backend.account.signup.</span></span><span class="sig-name descname"><span class="pre">signup_confirm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id_confirm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">uuid.UUID</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#app.backend.account.signup.signup_confirm" title="Lien permanent vers cette définition">#</a></dt>
+<dd><p>Confirm signup.</p>
+<p>Page /account/singup/&lt;<a class="reference external" href="uuid:id_confirm">uuid:id_confirm</a>&gt;.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres</dt>
+<dd class="field-odd"><p><strong>id_confirm</strong> (<em>uuid.UUID</em>) – Signup request ID.</p>
+</dd>
+</dl>
+</dd></dl>
 </section>
-<section id="reset">
-<h4>Reset<a class="headerlink" href="#reset" title="Lien permanent vers ce titre">#</a></h4>
+<section id="module-app.backend.account.reset">
+<span id="reset"></span><h4>Reset<a class="headerlink" href="#module-app.backend.account.reset" title="Lien permanent vers ce titre">#</a></h4>
+<p>Backend function to reset account password.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="app.backend.account.reset.reset">
+<span class="sig-prename descclassname"><span class="pre">app.backend.account.reset.</span></span><span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.backend.account.reset.reset" title="Lien permanent vers cette définition">#</a></dt>
+<dd><p>Handle main account reset page.</p>
+<p>Page /account/reset.</p>
+</dd></dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="app.backend.account.reset.reset_password">
+<span class="sig-prename descclassname"><span class="pre">app.backend.account.reset.</span></span><span class="sig-name descname"><span class="pre">reset_password</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id_reset</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#app.backend.account.reset.reset_password" title="Lien permanent vers cette définition">#</a></dt>
+<dd><p>Reset account, link from mail.</p>
+<p>Page /account/reset/&lt;<a class="reference external" href="uuid:id_reset">uuid:id_reset</a>&gt;.</p>
+</dd></dl>
 </section>
 </section>
 </section>
-<section id="data">
-<h2>Data<a class="headerlink" href="#data" title="Lien permanent vers ce titre">#</a></h2>
+<section id="module-app.data">
+<span id="data"></span><h2>Data<a class="headerlink" href="#module-app.data" title="Lien permanent vers ce titre">#</a></h2>
+<p>Data module.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="app.data.DataManager">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">app.data.</span></span><span class="sig-name descname"><span class="pre">DataManager</span></span><a class="headerlink" href="#app.data.DataManager" title="Lien permanent vers cette définition">#</a></dt>
+<dd><p>The base data manager objects.</p>
+<p>Used to acces data in the data/ folder.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="app.data.DataManager.add_competition">
+<span class="sig-name descname"><span class="pre">add_competition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mail</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id_competition</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">competition</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="modules.html#modules.models.competition.Competition" title="modules.models.competition.Competition"><span class="pre">modules.models.competition.Competition</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#app.data.DataManager.add_competition" title="Lien permanent vers cette définition">#</a></dt>
+<dd><p>Add a new competition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mail</strong> (<em>str</em>) – Competition manager’s mail.</p></li>
+<li><p><strong>id_competition</strong> (<em>int</em>) – Competition ID on sportscanins.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Renvoie</dt>
+<dd class="field-even"><p>Nothing. Use user.competitions[].</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="app.data.DataManager.add_user">
+<span class="sig-name descname"><span class="pre">add_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mail</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#app.data.DataManager.add_user" title="Lien permanent vers cette définition">#</a></dt>
+<dd><p>Add a new user.</p>
+<p>/!This function performs hash on password.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mail</strong> (<em>str</em>) – User’s mail address.</p></li>
+<li><p><strong>password</strong> (<em>str</em>) – User’s password.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Renvoie</dt>
+<dd class="field-even"><p>Nothing.</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="app.data.DataManager.load_competition">
+<span class="sig-name descname"><span class="pre">load_competition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mail</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id_competition</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="#app.data.models.competition.Competition" title="app.data.models.competition.Competition"><span class="pre">app.data.models.competition.Competition</span></a></span></span><a class="headerlink" href="#app.data.DataManager.load_competition" title="Lien permanent vers cette définition">#</a></dt>
+<dd><p>Load a competition.</p>
+<p>This only loads data, and return the competition object with associated data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mail</strong> (<em>str</em>) – Competition’s manager mail address.</p></li>
+<li><p><strong>id_competition</strong> (<em>int</em>) – sportscanins competition’s id.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Renvoie</dt>
+<dd class="field-even"><p>Competition object.</p>
+</dd>
+<dt class="field-odd">Type renvoyé</dt>
+<dd class="field-odd"><p>models.Competition</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="app.data.DataManager.load_users">
+<span class="sig-name descname"><span class="pre">load_users</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#app.data.models.user.User" title="app.data.models.user.User"><span class="pre">app.data.models.user.User</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#app.data.DataManager.load_users" title="Lien permanent vers cette définition">#</a></dt>
+<dd><p>Load users list.</p>
+<p>Get data from data/users.dat file and parse it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Renvoie</dt>
+<dd class="field-odd"><p>List of users.</p>
+</dd>
+<dt class="field-even">Type renvoyé</dt>
+<dd class="field-even"><p>list[models.User]</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="app.data.DataManager.set_user_password">
+<span class="sig-name descname"><span class="pre">set_user_password</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mail</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#app.data.DataManager.set_user_password" title="Lien permanent vers cette définition">#</a></dt>
+<dd><p>Change an user password.</p>
+<p>/!This function performs hash on password.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mail</strong> (<em>str</em>) – User to change password.</p></li>
+<li><p><strong>password</strong> (<em>str</em>) – New password.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Renvoie</dt>
+<dd class="field-even"><p>Nothing, updates data.</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="app.data.DataManager.users">
+<span class="sig-name descname"><span class="pre">users</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#app.data.models.user.User" title="app.data.models.user.User"><span class="pre">app.data.models.user.User</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#app.data.DataManager.users" title="Lien permanent vers cette définition">#</a></dt>
+<dd><p>Users.</p>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="app.data.DataManager.users_data">
+<span class="sig-name descname"><span class="pre">users_data</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#app.data.DataManager.users_data" title="Lien permanent vers cette définition">#</a></dt>
+<dd><p>Raw users data.</p>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="app.data.DataManager.write_users_data">
+<span class="sig-name descname"><span class="pre">write_users_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#app.data.DataManager.write_users_data" title="Lien permanent vers cette définition">#</a></dt>
+<dd><p>Write users data to data/users.dat file.</p>
+<p>Takes data from users_data property.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Renvoie</dt>
+<dd class="field-odd"><p>Nothing.</p>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
 <section id="module-app.data.models">
 <span id="models"></span><h3>Models<a class="headerlink" href="#module-app.data.models" title="Lien permanent vers ce titre">#</a></h3>
 <p>Data module models.</p>
@@ -332,14 +482,14 @@
 <li><a class="reference internal" href="#backend">Backend</a><ul>
 <li><a class="reference internal" href="#server">Server</a></li>
 <li><a class="reference internal" href="#account">Account</a><ul>
-<li><a class="reference internal" href="#login">Login</a></li>
-<li><a class="reference internal" href="#signup">Signup</a></li>
-<li><a class="reference internal" href="#reset">Reset</a></li>
+<li><a class="reference internal" href="#module-app.backend.account.login">Login</a></li>
+<li><a class="reference internal" href="#module-app.backend.account.signup">Signup</a></li>
+<li><a class="reference internal" href="#module-app.backend.account.reset">Reset</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a class="reference internal" href="#data">Data</a><ul>
+<li><a class="reference internal" href="#module-app.data">Data</a><ul>
 <li><a class="reference internal" href="#module-app.data.models">Models</a><ul>
 <li><a class="reference internal" href="#module-app.data.models.competition">Competition</a></li>
 <li><a class="reference internal" href="#module-app.data.models.user">User</a></li>
