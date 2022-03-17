@@ -8,3 +8,5 @@ PROGESCO Teams est disponible pour Windows et Linux.
 Téléchargez la dernière version, cliquez sur **Assets** et choisissez votrze système d'exploitation. Téléchragez le fichier et lancez le.
 #### Utilisation "en ligne"
 Une version en ligne du projet est disponible sur [Heroku](https://progesco-teams.herokuapp.com/). Vous pourrez alors l'utiliser sur tous les appreils.
+### Documentation
+Pour plus d'informations consultez la [documentation officielle](https://agilityteamsmanager.github.io/PROGESCO-Teams/).
