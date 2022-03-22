@@ -3,7 +3,7 @@ name: Test - mypy
 on: [push]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -17,4 +17,4 @@ jobs:
         pip install mypy
     - name: Analysing the code with mypy
       run: |
-        mypy app/backend/server.py
+        mypy -m app.backend.server
