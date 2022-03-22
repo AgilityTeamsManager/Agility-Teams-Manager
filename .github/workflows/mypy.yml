@@ -18,6 +18,6 @@ jobs:
     - name: Analysing the code with mypy
       run: |
         cd app/backend
-        MYPYPATH=/home/runner/work/PROGESCO-Teams/PROGESCO-Teams/app/backend
+        MYPYPATH=/home/runner/work/PROGESCO-Teams/PROGESCO-Teams/
         export MYPYPATH
         mypy server.py
