@@ -17,4 +17,4 @@ jobs:
         pip install mypy
     - name: Analysing the code with mypy
       run: |
-        mypy **/*.py
+        mypy app/backend/server.py
