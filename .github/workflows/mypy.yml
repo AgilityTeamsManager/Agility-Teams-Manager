@@ -20,4 +20,4 @@ jobs:
         cd app/backend
         MYPYPATH=../../
         export MYPYPATH
-        mypy -m app.backend.server
+        mypy server.py
