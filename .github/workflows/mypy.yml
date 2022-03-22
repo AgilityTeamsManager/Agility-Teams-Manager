@@ -17,5 +17,7 @@ jobs:
         pip install mypy
     - name: Analysing the code with mypy
       run: |
-        pwd
+        cd app/backend
+        MYPYPATH=../../
+        export MYPYPATH
         mypy -m app.backend.server
