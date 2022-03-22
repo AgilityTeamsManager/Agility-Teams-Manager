@@ -6,6 +6,7 @@ pyprogesco Scrapers - Calendar.
 Parse sportscanins.fr calendar data.
 """
 import logging
+from urllib.parse import urlparse, parse_qs, ParseResult
 
 from bs4 import BeautifulSoup
 from bs4.element import ResultSet, Tag
@@ -58,6 +59,7 @@ class Calendar:
                                                           "CAESC": self.list_events("CAESC"),
                                                           "Pass": self.list_events("Pass"),
                                                           "Formation": self.list_events("Formation")}"""
+        self.events = {"Agility": self.list_events("Agility")}
 
     def list_events(self, activity: str = None, param_month: int = None) -> dict[int, list[Event]]:
         """
@@ -92,14 +94,14 @@ class Calendar:
             for row in table.find_all("tr"):
                 event: Event = Event()
                 cells: ResultSet = row.find_all("td")
-                event.type = cells[1].find("div").lstrip("\n").strip()
+                event.type = cells[1].find("div").text.lstrip("\n").strip()
                 main_cell: ResultSet = cells[2].contents
                 event.format = main_cell[2].strip(" -\n")
                 event.day = main_cell[1].text
-                event.region = main_cell[4].text.lstrip("\n-").strip()
+                event.region = main_cell[4].lstrip("\n-").strip()
                 event.club = " ".join(main_cell[5].text.lstrip("\n ").replace("\n", "").split())
-                result[month].append(event)
                 link: ParseResult = urlparse(main_cell[5]["href"])
                 event.id = int(parse_qs(link.query)["IdConcours"][0])
+                result[month].append(event)
         logging.debug("Loading... Done.")
         return result

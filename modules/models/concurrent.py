@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Data module user model."""
+"""Concurrent model."""
+# Agility Teams Manager - Concurrent model.
 # Copyright (C) 2022  Virinas-code
 
 # This program is free software: you can redistribute it and/or modify
@@ -15,29 +16,25 @@
 
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
-import app.data.models as models
 
 
-class User:
-    """An user."""
+class Concurrent:
+    """A concurent."""
 
-    def __init__(self, mail_address: str, password: str) -> None:
+    def __init__(self, name: str, club: str, tels: str, mail: str):
         """
-        Initialize new user.
+        A concurrent.
 
-        THIS DOESN'T RETRIEVE DATA.
+        :param str name: Name.
+        :param str club: Club.
+        :param str tels: Telephone numbers.
+        :param str mail: Mail address.
         """
-        self.mail: str = mail_address
-        self.password: str = password
-        self.competitions: dict[int, models.Competition] = {}
-        """Competitions by ID."""
-
-    def save(self) -> None:
-        """
-        Save this user.
-
-        .. warning::
-            This doesn't write data to data/users.dat
-        """
-        
-
+        self.name: str = name
+        """Name."""
+        self.club: str = club
+        """Club."""
+        self.tels: str = tels
+        """Telephone numbers."""
+        self.mail: str = mail
+        """Mail address."""

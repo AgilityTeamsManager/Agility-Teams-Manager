@@ -69,7 +69,7 @@ class DataManager:
         logging.info("Loaded users data.")
         return users
 
-    def load_competition(self, mail: str, id_competition: int) -> models.Competition:
+    def load_competition(self, mail: str, id_competition: int) -> Competition:
         """
         Load a competition.
 
@@ -78,7 +78,7 @@ class DataManager:
         :param str mail: Competition's manager mail address.
         :param int id_competition: sportscanins competition's id.
         :return: Competition object.
-        :rtype: models.Competition
+        :rtype: Competition
         """
         logging.debug("Loading competition %(id_competition)s for user %(mail)s")
         path: str = "data/" + mail + "/" + str(id_competition) + "/info.dat"

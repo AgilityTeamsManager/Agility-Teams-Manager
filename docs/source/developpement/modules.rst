@@ -56,38 +56,32 @@ Competition
 .. automodule:: modules.models.competition
     :members:
 
-Agility Teams Manager Module
-============================
+Concurrent
+----------
 
-.. error::
-    Undocumented module.
-
-.. automodule:: modules.agility_teams_manager
+.. automodule:: modules.models.concurrent
     :members:
 
-Data
-----
+Dog
+---
 
-Objects
--------
-
-.. automodule:: modules.agility_teams_manager.objects
+.. automodule:: modules.models.dog
     :members:
 
-Competition
-^^^^^^^^^^^
+Group
+-----
 
-.. automodule:: modules.agility_teams_manager.objects.competition
-    :members:
-
-Person
-^^^^^^
-
-.. automodule:: modules.agility_teams_manager.objects.person
+.. automodule:: modules.models.group
     :members:
 
 Team
-^^^^
+----
 
-.. automodule:: modules.agility_teams_manager.objects.team
+.. automodule:: modules.models.team
     :members:
+
+Agility Teams Manager Module
+============================
+
+.. important::
+    The module was removed due to some weird errors with git submodule. See :commit:`f4ab1af7d080de80f659b4df7c8fe58d4e1d3285`

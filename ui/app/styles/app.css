@@ -70,7 +70,9 @@ header .button {
   font-size: 45px;
 }
 
-.button {
+/* DEPRECATED: Use components/button */
+
+/*.button {
   border-radius: 5px;
   color: black;
   border-width: 0px;
@@ -106,7 +108,7 @@ header .button .material-icons {
 .button2 {
   cursor: pointer;
   border: none;
-}
+}*/
 
 main {
   padding: 5px;
@@ -125,7 +127,9 @@ p {
   font-family: "Open Sans";
 }
 
-input::placeholder {
+/* DEPRECATED: Use components/input instead */
+
+/*input::placeholder {
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
 }
@@ -150,7 +154,7 @@ input:invalid {
 
 input:focus {
   outline: none;
-}
+}*/
 
 label {
   font-family: 'Open Sans', sans-serif;

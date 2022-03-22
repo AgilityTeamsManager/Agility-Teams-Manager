@@ -1,0 +1,85 @@
+/*
+ * Button component. 
+ * 
+ * There are two buttons type:
+ *  - Big buttons (in header)
+ *  - Smaller buttons (in main)
+ * Each button has an icon and maybe some text.
+ */
+/*
+Agility Teams Manager - Button component.
+Copyright (C) 2022  Virinas-code
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/
+
+/* Common */
+
+.button {
+    /* Common button styles */
+    border-radius: 5px;
+    border-width: 0px;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
+
+.button > span {
+    /* Common icon styles */
+    vertical-align: text-top;
+}
+
+/* Colors */
+
+.button.green {
+    /* Color update */
+    color: white;
+}
+
+.button.green:hover {
+    /* Hover update */
+    filter: brightness(150%);
+}
+
+.button.green {
+    /* Green button color */
+    background-color: green;
+}
+
+/* Big */
+
+.button.big {
+    /* Big button styles */
+    height: 50px;
+    font-size: 45px;
+}
+
+.button.big > span {
+    font-size: 50px;
+}
+
+/* Smaller */
+
+.button.small {
+    /* Smaller button styles */
+    height: 31px;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+/* Hover */
+
+.button:hover {
+    filter: brightness(70%);
+}

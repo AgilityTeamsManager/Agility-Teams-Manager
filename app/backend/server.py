@@ -38,6 +38,7 @@ from app.backend.account.signup import signup, signup_confirm
 from app.backend.account.reset import reset, reset_password
 ##from app.backend.account.reset import reset, reset_password
 from app.backend.root import index
+from app.backend.session.session import dev_session
 from app.backend.static import public, static_ui
 from app.data import DataManager
 
@@ -79,6 +80,9 @@ flask_app.add_url_rule("/account/reset", view_func=reset,
 flask_app.add_url_rule("/account/reset/<uuid:id_reset>",
                        view_func=reset_password,
                        methods=["GET", "POST"])
+
+# Session
+flask_app.add_url_rule("/dev/session", view_func=dev_session)
 
 
 if __name__ == "__main__":

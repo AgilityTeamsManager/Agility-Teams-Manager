@@ -44,7 +44,6 @@ GOOGLE_CLIENT_ID = os.environ["ATM_GMAIL_CLIENT_ID"]
 GOOGLE_CLIENT_SECRET = os.environ["ATM_GMAIL_CLIENT_SECRET"]
 GOOGLE_REFRESH_TOKEN = os.environ["ATM_GMAIL_REFRESH_TOKEN"]
 
-
 def command_to_url(command):
     return '%s/%s' % (GOOGLE_ACCOUNTS_BASE_URL, command)
 

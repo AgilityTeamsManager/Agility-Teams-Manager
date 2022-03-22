@@ -22,8 +22,15 @@
    <title>PROGESCO Teams - App</title>
    <meta charset="utf-8" />
    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-   <link rel="stylesheet" href="/static/app.css" />
+   <link rel="stylesheet" href="/ui/app/styles/app.css" />
+   <link rel="stylesheet" href="/ui/app/styles/error.css" />
+   <link rel="stylesheet" href="/ui/common/styles/common.css" />
+   <link rel="stylesheet" href="/ui/components/button/styles/button.css" />
+   <link rel="stylesheet" href="/ui/components/input/styles/input.css" />
+   <link rel="stylesheet" href="/ui/components/title/styles/title.css" />
+   <link rel="stylesheet" href="/ui/components/list/styles/list.css" />
    <link rel="manifest" href="/manifest.json" />
+   <script src="/ui/app/scripts/error.js" defer></script>
    {% block link %}{% endblock %}
   </head>
   <body>
@@ -39,6 +46,7 @@
      {% block button %}{% endblock %}
     </div>
    </header>
+   <div id="errors"></div>
    {% block main %}{% endblock %}
   </body>
  </html>

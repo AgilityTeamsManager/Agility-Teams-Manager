@@ -1,6 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Data module user model."""
+"""
+Group model.
+
+.. note::
+    A group is a concurrent + a dog.
+
+    The unique key of a group is the record ID.
+"""
+# Agility Teams Manager - Group model.
 # Copyright (C) 2022  Virinas-code
 
 # This program is free software: you can redistribute it and/or modify
@@ -15,29 +23,19 @@
 
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
-import app.data.models as models
+from modules.models.concurrent import Concurrent
+from modules.models.dog import Dog
 
 
-class User:
-    """An user."""
-
-    def __init__(self, mail_address: str, password: str) -> None:
+class Group:
+    def __init__(self, concurrent: Concurrent, dog: Dog) -> None:
         """
-        Initialize new user.
+        Create a new group.
 
-        THIS DOESN'T RETRIEVE DATA.
+        :param modules.models.concurrent.Concurrent concurrent: Concurrent.
+        :param modules.models.dog.Dog dog: Dog.
         """
-        self.mail: str = mail_address
-        self.password: str = password
-        self.competitions: dict[int, models.Competition] = {}
-        """Competitions by ID."""
-
-    def save(self) -> None:
-        """
-        Save this user.
-
-        .. warning::
-            This doesn't write data to data/users.dat
-        """
-        
-
+        self.concurrent: Concurrent = concurrent
+        """Concurrent."""
+        self.dog: Dog = dog
+        """Dog."""

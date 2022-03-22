@@ -17,6 +17,9 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
+import logging
+import os.path
+import pickle
 
 
 class Competition:
@@ -72,3 +75,25 @@ class Competition:
         """
         if not self.configured:
             raise RuntimeError("Competition not configured.")
+
+    def save(self, mail: str) -> None:
+        """
+        Save competition.
+
+        :param str mail: Competition manager's mail.
+        """
+        logging.debug("Saving competition %(self.id)s for user %(mail)s")
+        base: str = "data/" + mail + "/" + self.id + "/"
+        if not os.path.exists(base):
+            os.mkdir(base)
+        infos: dict[str, str] = {
+            "id": self.id,
+            "type": self.type,
+            "format": self.format,
+            "day": self.day,
+            "club": self.club,
+            "name": self.name,
+            "image": self.image
+        }
+        with open(base + "info.dat") as file:
+            pickle.dump(infos, file)

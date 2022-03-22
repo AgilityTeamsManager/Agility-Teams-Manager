@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Data module user model."""
+"""Dog model."""
+# Agility Teams Manager - Dog model.
 # Copyright (C) 2022  Virinas-code
 
 # This program is free software: you can redistribute it and/or modify
@@ -15,29 +16,20 @@
 
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
-import app.data.models as models
 
 
-class User:
-    """An user."""
-
-    def __init__(self, mail_address: str, password: str) -> None:
+class Dog:
+    def __init__(self, name: str, category: str, grade: int):
         """
-        Initialize new user.
+        A dog.
 
-        THIS DOESN'T RETRIEVE DATA.
+        :param str name: Name.
+        :param str category: Category (A-D).
+        :param int grade: Grade (1-3).
         """
-        self.mail: str = mail_address
-        self.password: str = password
-        self.competitions: dict[int, models.Competition] = {}
-        """Competitions by ID."""
-
-    def save(self) -> None:
-        """
-        Save this user.
-
-        .. warning::
-            This doesn't write data to data/users.dat
-        """
-        
-
+        self.name: str = name
+        """Name."""
+        self.category: str = category
+        """Category."""
+        self.grade: int = grade
+        """Grade."""
