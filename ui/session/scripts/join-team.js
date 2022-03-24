@@ -16,9 +16,15 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 var items = document.querySelectorAll("ctv-item"); // All the items
+var loadingBar = document.querySelector("#loading-bar");
 
 function click_on_join(e) {
-    console.log(this.parentNode.parentNode.querySelector("header > div > span").textContent);
+    var teamToJoin = this.parentNode.parentNode.querySelector("header > div > span").textContent;
+    var request = new XMLHttpRequest();
+    loadingBar.hidden = false;
+    request.open("GET", "/session/" + sessionId + "/join/" + teamToJoin, false);
+    request.send();
+    loadingBar.hidden = true;
 }
 
 function setup() {

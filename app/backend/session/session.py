@@ -9,6 +9,8 @@ Pages:
 .. note::
     Also include a dev page (/dev/session)
 """
+from uuid import UUID, uuid4
+
 from flask import render_template
 
 from modules.models.concurrent import Concurrent
@@ -30,4 +32,14 @@ def dev_session():
     other_group: Group = Group(current_concurrent, other_dog)
     teams: list[Team] = [Team("Test team", 1, "A", current_group, other_group), Team("Another test team", 1, "C", current_group, current_group), Team("VIP team", 3, "A", current_group)]
     return render_template("/session/session.html", group=current_group,
-                           teams=teams)
+                           teams=teams, session_id=uuid4())
+
+
+def session_join(session_id: UUID, team: str):
+    """
+    Join a team.
+
+    Page /session/<uuid:id_session>/join/<string:team>.
+    """
+    print(session_id, team)
+    return "OK"

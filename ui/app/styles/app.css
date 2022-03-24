@@ -17,6 +17,7 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>. 
  */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Open+Sans&display=swap');
+@import url('/ui/app/styles/loading-bar.css');
 
 :root {
   font-family: "Open Sans", sans-serif;

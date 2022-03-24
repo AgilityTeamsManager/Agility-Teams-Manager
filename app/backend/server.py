@@ -28,6 +28,7 @@ from flask import Flask
 import coloredlogs
 
 sys.path.append(os.path.abspath("."))
+print(sys.path, os.getcwd())
 
 # Load env vars
 from app.env import load_env_from_conf
@@ -38,7 +39,7 @@ from app.backend.account.signup import signup, signup_confirm
 from app.backend.account.reset import reset, reset_password
 ##from app.backend.account.reset import reset, reset_password
 from app.backend.root import index
-from app.backend.session.session import dev_session
+from app.backend.session.session import dev_session, session_join
 from app.backend.static import public, static_ui
 from app.data import DataManager
 
@@ -83,6 +84,8 @@ flask_app.add_url_rule("/account/reset/<uuid:id_reset>",
 
 # Session
 flask_app.add_url_rule("/dev/session", view_func=dev_session)
+flask_app.add_url_rule("/session/<uuid:session_id>/join/<string:team>",
+                       view_func=session_join)
 
 
 if __name__ == "__main__":
