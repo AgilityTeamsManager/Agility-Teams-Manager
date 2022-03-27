@@ -63,9 +63,12 @@ class DataManager:
             path: str = "data/" + mail + "/competitions.dat"
             competitions: list[int] = pickle.load(open(path, "br"))
             for competition, competition_id in competitions:
-                user.competitions[competition_id] = self.load_competition(mail, competition)
+                user.competitions[competition_id] = self.load_competition(
+                    mail, competition
+                )
             users[mail] = user
         self.users = users
+        self.users[None] = None
         logging.info("Loaded users data.")
         return users
 
@@ -91,7 +94,9 @@ class DataManager:
             compet_format: str = data["format"]
             compet_day: str = data["day"]
             compet_club: str = data["club"]
-        competition: Competition = Competition(compet_id, compet_type, compet_format, compet_day, compet_club)
+        competition: Competition = Competition(
+            compet_id, compet_type, compet_format, compet_day, compet_club
+        )
         competition.configure(compet_name, compet_image)
         return competition
 
@@ -142,8 +147,9 @@ class DataManager:
         with open("data/users.dat", "bw") as file:
             pickle.dump(self.users_data, file)
 
-    def add_competition(self, mail: str, id_competition: int,
-                        competition: Competition) -> None:
+    def add_competition(
+        self, mail: str, id_competition: int, competition: Competition
+    ) -> None:
         """
         Add a new competition.
 
