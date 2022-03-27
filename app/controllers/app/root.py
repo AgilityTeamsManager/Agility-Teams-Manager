@@ -15,7 +15,11 @@
 
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
-from flask import render_template
+from flask import render_template, session
+from modules.models.user import User  # TODO: Debug
+
+import app.common
+from app.controllers.account.auth import check_auth
 
 
 def app_root():
@@ -24,4 +28,9 @@ def app_root():
 
     Page /app.
     """
-    return render_template("app/app_root.html")
+    return check_auth(
+        render_template(
+            "app/root/root.html",
+            current_user=app.common.data.users[session.get("auth", None)],
+        )
+    )
