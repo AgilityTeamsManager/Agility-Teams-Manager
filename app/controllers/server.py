@@ -32,15 +32,17 @@ print(sys.path, os.getcwd())
 
 # Load env vars
 from app.env import load_env_from_conf
+
 load_env_from_conf()
 
-from app.backend.account.login import login
-from app.backend.account.signup import signup, signup_confirm
-from app.backend.account.reset import reset, reset_password
+from app.controllers.account.login import login
+from app.controllers.account.signup import signup, signup_confirm
+from app.controllers.account.reset import reset, reset_password
+
 ##from app.backend.account.reset import reset, reset_password
-from app.backend.root import index
-from app.backend.session.session import dev_session, session_join
-from app.backend.static import public, static_ui
+from app.controllers.root import index
+from app.controllers.session.session import dev_session, session_join
+from app.controllers.static import public, static_ui
 from app.data import DataManager
 
 os.environ["COLOREDLOGS_LOG_FORMAT"] = "%(asctime)s: [%(module)-15s] %(message)s"
@@ -66,26 +68,23 @@ flask_app.add_url_rule("/ui/<path:filename>", view_func=static_ui)
 
 # Account rules
 # Login
-flask_app.add_url_rule("/account/login", methods=["GET", "POST"],
-                       view_func=login)
+flask_app.add_url_rule("/account/login", methods=["GET", "POST"], view_func=login)
 
 # Signup
-flask_app.add_url_rule("/account/signup", methods=["POST"],
-                       view_func=signup)
-flask_app.add_url_rule("/account/signup/<uuid:id_confirm>",
-                       view_func=signup_confirm)
+flask_app.add_url_rule("/account/signup", methods=["POST"], view_func=signup)
+flask_app.add_url_rule("/account/signup/<uuid:id_confirm>", view_func=signup_confirm)
 
 # Reset password
-flask_app.add_url_rule("/account/reset", view_func=reset,
-                       methods=["GET", "POST"])
-flask_app.add_url_rule("/account/reset/<uuid:id_reset>",
-                       view_func=reset_password,
-                       methods=["GET", "POST"])
+flask_app.add_url_rule("/account/reset", view_func=reset, methods=["GET", "POST"])
+flask_app.add_url_rule(
+    "/account/reset/<uuid:id_reset>", view_func=reset_password, methods=["GET", "POST"]
+)
 
 # Session
 flask_app.add_url_rule("/dev/session", view_func=dev_session)
-flask_app.add_url_rule("/session/<uuid:session_id>/join/<string:team>",
-                       view_func=session_join)
+flask_app.add_url_rule(
+    "/session/<uuid:session_id>/join/<string:team>", view_func=session_join
+)
 
 
 if __name__ == "__main__":
