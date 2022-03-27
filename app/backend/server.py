@@ -89,4 +89,5 @@ flask_app.add_url_rule("/session/<uuid:session_id>/join/<string:team>",
 
 
 if __name__ == "__main__":
+    os.environ["FLASK_ENV"] = "developpement"
     flask_app.run(host="localhost", port=8080, debug=True)
