@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="#" /><link rel="search" title="Recherche" href="search.html" />
 
-    <meta name="generator" content="sphinx-4.4.0, furo 2022.03.04"/><title>Index - Documentation Agility Teams Manager 0.1</title>
+    <meta name="generator" content="sphinx-4.5.0, furo 2022.03.04"/><title>Index - Documentation Agility Teams Manager 0.1</title>
 <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=935aa2abcc5c1da4283d1dc201fb1f0add16d23a" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=25ceb02ed1c46dc30f2321ff83e92799f69dfdb9" />
@@ -155,6 +155,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="developpement.html">Programmation</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="developpement/app.html">Main app module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="developpement/modules.html">Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developpement/data.html">Data model</a></li>
 </ul>
 </li>
 </ul>
@@ -192,7 +193,7 @@
           
 <section class="genindex-section">
   <h1 id="index">Index</h1>
-  <div class="genindex-jumpbox"><a href="#A"><strong>A</strong></a> | <a href="#C"><strong>C</strong></a> | <a href="#D"><strong>D</strong></a> | <a href="#E"><strong>E</strong></a> | <a href="#F"><strong>F</strong></a> | <a href="#H"><strong>H</strong></a> | <a href="#I"><strong>I</strong></a> | <a href="#L"><strong>L</strong></a> | <a href="#M"><strong>M</strong></a> | <a href="#N"><strong>N</strong></a> | <a href="#P"><strong>P</strong></a> | <a href="#R"><strong>R</strong></a> | <a href="#S"><strong>S</strong></a> | <a href="#T"><strong>T</strong></a> | <a href="#U"><strong>U</strong></a> | <a href="#W"><strong>W</strong></a></div>
+  <div class="genindex-jumpbox"><a href="#A"><strong>A</strong></a> | <a href="#C"><strong>C</strong></a> | <a href="#D"><strong>D</strong></a> | <a href="#E"><strong>E</strong></a> | <a href="#F"><strong>F</strong></a> | <a href="#G"><strong>G</strong></a> | <a href="#H"><strong>H</strong></a> | <a href="#I"><strong>I</strong></a> | <a href="#L"><strong>L</strong></a> | <a href="#M"><strong>M</strong></a> | <a href="#N"><strong>N</strong></a> | <a href="#P"><strong>P</strong></a> | <a href="#R"><strong>R</strong></a> | <a href="#S"><strong>S</strong></a> | <a href="#T"><strong>T</strong></a> | <a href="#U"><strong>U</strong></a> | <a href="#W"><strong>W</strong></a></div>
 </section>
 <section id="A" class="genindex-section">
   <h2>A</h2>
@@ -203,24 +204,24 @@
         <li><a href="developpement/app.html#app.data.DataManager.add_user">add_user() (méthode app.data.DataManager)</a>
 </li>
         <li>
-    app.backend.account.login
+    app.controllers.account.login
 
         <ul>
-          <li><a href="developpement/app.html#module-app.backend.account.login">module</a>
+          <li><a href="developpement/app.html#module-app.controllers.account.login">module</a>
 </li>
         </ul></li>
         <li>
-    app.backend.account.reset
+    app.controllers.account.reset
 
         <ul>
-          <li><a href="developpement/app.html#module-app.backend.account.reset">module</a>
+          <li><a href="developpement/app.html#module-app.controllers.account.reset">module</a>
 </li>
         </ul></li>
         <li>
-    app.backend.account.signup
+    app.controllers.account.signup
 
         <ul>
-          <li><a href="developpement/app.html#module-app.backend.account.signup">module</a>
+          <li><a href="developpement/app.html#module-app.controllers.account.signup">module</a>
 </li>
         </ul></li>
     </ul></td>
@@ -263,10 +264,16 @@
     <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="developpement/modules.html#modules.pyprogesco.scrapers.calendar.Calendar">Calendar (classe dans modules.pyprogesco.scrapers.calendar)</a>
 </li>
+        <li><a href="developpement/modules.html#modules.models.team.Team.category">category (attribut modules.models.team.Team)</a>
+</li>
         <li><a href="developpement/modules.html#modules.models.competition.Competition.check_configured">check_configured() (méthode modules.models.competition.Competition)</a>
 </li>
         <li><a href="developpement/modules.html#modules.models.competition.Competition.club">club (attribut modules.models.competition.Competition)</a>
+
+        <ul>
+          <li><a href="developpement/modules.html#modules.models.concurrent.Concurrent.club">(attribut modules.models.concurrent.Concurrent)</a>
 </li>
+        </ul></li>
         <li><a href="developpement/app.html#app.data.models.competition.Competition">Competition (classe dans app.data.models.competition)</a>
 
         <ul>
@@ -277,8 +284,12 @@
     <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="developpement/app.html#app.data.models.user.User.competitions">competitions (attribut app.data.models.user.User)</a>
 </li>
-        <li><a href="developpement/modules.html#modules.pyprogesco.objects.concurrent.Concurrent">Concurrent (classe dans modules.pyprogesco.objects.concurrent)</a>
+        <li><a href="developpement/modules.html#modules.models.concurrent.Concurrent">Concurrent (classe dans modules.models.concurrent)</a>
+
+        <ul>
+          <li><a href="developpement/modules.html#modules.pyprogesco.objects.concurrent.Concurrent">(classe dans modules.pyprogesco.objects.concurrent)</a>
 </li>
+        </ul></li>
         <li><a href="developpement/modules.html#modules.models.competition.Competition.configure">configure() (méthode modules.models.competition.Competition)</a>
 </li>
         <li><a href="developpement/modules.html#modules.models.competition.Competition.configured">configured (attribut modules.models.competition.Competition)</a>
@@ -323,6 +334,16 @@
   </tr></table>
 </section>
 
+<section id="G" class="genindex-section">
+  <h2>G</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="developpement/modules.html#modules.models.team.Team.grade">grade (attribut modules.models.team.Team)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
 <section id="H" class="genindex-section">
   <h2>H</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
@@ -361,6 +382,8 @@
   <h2>L</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="developpement/modules.html#modules.models.team.Team.leader">leader (attribut modules.models.team.Team)</a>
+</li>
         <li><a href="developpement/modules.html#modules.pyprogesco.scrapers.calendar.Calendar.list_events">list_events() (méthode modules.pyprogesco.scrapers.calendar.Calendar)</a>
 </li>
         <li><a href="developpement/modules.html#modules.pyprogesco.parsers.list_concurrents.ListConcurrentsParser">ListConcurrentsParser (classe dans modules.pyprogesco.parsers.list_concurrents)</a>
@@ -371,7 +394,7 @@
 </li>
         <li><a href="developpement/app.html#app.data.DataManager.load_users">load_users() (méthode app.data.DataManager)</a>
 </li>
-        <li><a href="developpement/app.html#app.backend.account.login.login">login() (dans le module app.backend.account.login)</a>
+        <li><a href="developpement/app.html#app.controllers.account.login.login">login() (dans le module app.controllers.account.login)</a>
 </li>
     </ul></td>
   </tr></table>
@@ -381,15 +404,19 @@
   <h2>M</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="developpement/modules.html#modules.models.concurrent.Concurrent.mail">mail (attribut modules.models.concurrent.Concurrent)</a>
+</li>
+        <li><a href="developpement/modules.html#modules.models.team.Team.members">members (attribut modules.models.team.Team)</a>
+</li>
         <li>
     module
 
         <ul>
-          <li><a href="developpement/app.html#module-app.backend.account.login">app.backend.account.login</a>
+          <li><a href="developpement/app.html#module-app.controllers.account.login">app.controllers.account.login</a>
 </li>
-          <li><a href="developpement/app.html#module-app.backend.account.reset">app.backend.account.reset</a>
+          <li><a href="developpement/app.html#module-app.controllers.account.reset">app.controllers.account.reset</a>
 </li>
-          <li><a href="developpement/app.html#module-app.backend.account.signup">app.backend.account.signup</a>
+          <li><a href="developpement/app.html#module-app.controllers.account.signup">app.controllers.account.signup</a>
 </li>
           <li><a href="developpement/app.html#module-app.data">app.data</a>
 </li>
@@ -400,6 +427,14 @@
           <li><a href="developpement/app.html#module-app.data.models.user">app.data.models.user</a>
 </li>
           <li><a href="developpement/modules.html#module-modules.models.competition">modules.models.competition</a>
+</li>
+          <li><a href="developpement/modules.html#module-modules.models.concurrent">modules.models.concurrent</a>
+</li>
+          <li><a href="developpement/modules.html#module-modules.models.dog">modules.models.dog</a>
+</li>
+          <li><a href="developpement/modules.html#module-modules.models.group">modules.models.group</a>
+</li>
+          <li><a href="developpement/modules.html#module-modules.models.team">modules.models.team</a>
 </li>
           <li><a href="developpement/modules.html#module-modules.pyprogesco">modules.pyprogesco</a>
 </li>
@@ -416,13 +451,41 @@
           <li><a href="developpement/modules.html#module-modules.pyprogesco.scrapers.calendar">modules.pyprogesco.scrapers.calendar</a>
 </li>
         </ul></li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li>
     modules.models.competition
 
         <ul>
           <li><a href="developpement/modules.html#module-modules.models.competition">module</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li>
+    modules.models.concurrent
+
+        <ul>
+          <li><a href="developpement/modules.html#module-modules.models.concurrent">module</a>
+</li>
+        </ul></li>
+        <li>
+    modules.models.dog
+
+        <ul>
+          <li><a href="developpement/modules.html#module-modules.models.dog">module</a>
+</li>
+        </ul></li>
+        <li>
+    modules.models.group
+
+        <ul>
+          <li><a href="developpement/modules.html#module-modules.models.group">module</a>
+</li>
+        </ul></li>
+        <li>
+    modules.models.team
+
+        <ul>
+          <li><a href="developpement/modules.html#module-modules.models.team">module</a>
 </li>
         </ul></li>
         <li>
@@ -487,6 +550,10 @@
         <ul>
           <li><a href="developpement/modules.html#modules.models.competition.Competition.name">(attribut modules.models.competition.Competition)</a>
 </li>
+          <li><a href="developpement/modules.html#modules.models.concurrent.Concurrent.name">(attribut modules.models.concurrent.Concurrent)</a>
+</li>
+          <li><a href="developpement/modules.html#modules.models.team.Team.name">(attribut modules.models.team.Team)</a>
+</li>
         </ul></li>
     </ul></td>
   </tr></table>
@@ -514,9 +581,9 @@
 </li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="developpement/app.html#app.backend.account.reset.reset">reset() (dans le module app.backend.account.reset)</a>
+        <li><a href="developpement/app.html#app.controllers.account.reset.reset">reset() (dans le module app.controllers.account.reset)</a>
 </li>
-        <li><a href="developpement/app.html#app.backend.account.reset.reset_password">reset_password() (dans le module app.backend.account.reset)</a>
+        <li><a href="developpement/app.html#app.controllers.account.reset.reset_password">reset_password() (dans le module app.controllers.account.reset)</a>
 </li>
     </ul></td>
   </tr></table>
@@ -526,13 +593,19 @@
   <h2>S</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="developpement/app.html#app.data.DataManager.set_user_password">set_user_password() (méthode app.data.DataManager)</a>
+        <li><a href="developpement/app.html#app.data.models.user.User.save">save() (méthode app.data.models.user.User)</a>
+
+        <ul>
+          <li><a href="developpement/modules.html#modules.models.competition.Competition.save">(méthode modules.models.competition.Competition)</a>
 </li>
+        </ul></li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="developpement/app.html#app.backend.account.signup.signup">signup() (dans le module app.backend.account.signup)</a>
+        <li><a href="developpement/app.html#app.data.DataManager.set_user_password">set_user_password() (méthode app.data.DataManager)</a>
 </li>
-        <li><a href="developpement/app.html#app.backend.account.signup.signup_confirm">signup_confirm() (dans le module app.backend.account.signup)</a>
+        <li><a href="developpement/app.html#app.controllers.account.signup.signup">signup() (dans le module app.controllers.account.signup)</a>
+</li>
+        <li><a href="developpement/app.html#app.controllers.account.signup.signup_confirm">signup_confirm() (dans le module app.controllers.account.signup)</a>
 </li>
     </ul></td>
   </tr></table>
@@ -541,6 +614,12 @@
 <section id="T" class="genindex-section">
   <h2>T</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="developpement/modules.html#modules.models.team.Team">Team (classe dans modules.models.team)</a>
+</li>
+        <li><a href="developpement/modules.html#modules.models.concurrent.Concurrent.tels">tels (attribut modules.models.concurrent.Concurrent)</a>
+</li>
+    </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="developpement/app.html#app.data.models.competition.Competition.type">type (attribut app.data.models.competition.Competition)</a>
 

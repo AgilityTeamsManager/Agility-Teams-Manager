@@ -8,7 +8,7 @@ Backend
 Server
 ------
 
-.. automodule:: app.backend.server
+.. automodule:: app.controllers.server
     :members:
 
 Account
@@ -17,19 +17,19 @@ Account
 Login
 ^^^^^
 
-.. automodule:: app.backend.account.login
+.. automodule:: app.controllers.account.login
     :members:
 
 Signup
 ^^^^^^
 
-.. automodule:: app.backend.account.signup
+.. automodule:: app.controllers.account.signup
     :members:
 
 Reset
 ^^^^^
 
-.. automodule:: app.backend.account.reset
+.. automodule:: app.controllers.account.reset
     :members:
 
 Data

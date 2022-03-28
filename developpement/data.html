@@ -2,11 +2,14 @@
 <html class="no-js" lang="fr">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Recherche" href="#" />
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Recherche" href="../search.html" /><link rel="prev" title="Modules" href="modules.html" />
 
-    <meta name="generator" content="sphinx-4.5.0, furo 2022.03.04"/><title>Recherche - Documentation Agility Teams Manager 0.1</title><link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=935aa2abcc5c1da4283d1dc201fb1f0add16d23a" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=25ceb02ed1c46dc30f2321ff83e92799f69dfdb9" />
+    <meta name="generator" content="sphinx-4.5.0, furo 2022.03.04"/>
+        <title>Data model - Documentation Agility Teams Manager 0.1</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=935aa2abcc5c1da4283d1dc201fb1f0add16d23a" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=25ceb02ed1c46dc30f2321ff83e92799f69dfdb9" />
     
     
 
@@ -118,7 +121,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">Documentation Agility Teams Manager 0.1</div></a>
+      <a href="../index.html"><div class="brand">Documentation Agility Teams Manager 0.1</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -129,7 +132,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -138,23 +141,23 @@
   <aside class="sidebar-drawer">
     <div class="sidebar-container">
       
-      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
   
   <span class="sidebar-brand-text">Documentation Agility Teams Manager 0.1</span>
   
-</a><form class="sidebar-search-container" method="get" action="#" role="search">
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder=Recherche name="q" aria-label="Recherche">
   <input type="hidden" name="check_keywords" value="yes">
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">Contenu:</span></p>
-<ul>
-<li class="toctree-l1 has-children"><a class="reference internal" href="developpement.html">Programmation</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="developpement/app.html">Main app module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="developpement/modules.html">Modules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="developpement/data.html">Data model</a></li>
+<ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../developpement.html">Programmation</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="app.html">Main app module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html">Modules</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Data model</a></li>
 </ul>
 </li>
 </ul>
@@ -183,23 +186,71 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          
-<noscript>
-<div class="admonition error">
-  <p class="admonition-title">Erreur</p>
-  <p>
-    Please activate JavaScript to enable the search functionality.
-  </p>
+          <section id="data-model">
+<h1>Data model<a class="headerlink" href="#data-model" title="Lien permanent vers ce titre">#</a></h1>
+<p>All the data is stored in the <code class="docutils literal notranslate"><span class="pre">data/</span></code> path.</p>
+<section id="structure">
+<h2>Structure<a class="headerlink" href="#structure" title="Lien permanent vers ce titre">#</a></h2>
+<dl>
+<dt><code class="docutils literal notranslate"><span class="pre">users.dat</span></code></dt><dd><p>Users and passwords</p>
+<p><strong>Format:</strong> Pickle (<code class="docutils literal notranslate"><span class="pre">dict[str,</span> <span class="pre">str]</span></code>)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">&lt;user&gt;/</span></code></dt><dd><p>User data</p>
+</dd>
+</dl>
+<section id="user-data">
+<h3>User data<a class="headerlink" href="#user-data" title="Lien permanent vers ce titre">#</a></h3>
+<dl>
+<dt><code class="docutils literal notranslate"><span class="pre">competitions.dat</span></code></dt><dd><p>User competitions list.</p>
+<p><strong>Format:</strong> Pickle (<code class="docutils literal notranslate"><span class="pre">list[int]</span></code>)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">&lt;competition_id&gt;/</span></code></dt><dd><p>Competition data.</p>
+</dd>
+</dl>
+<section id="competition-data">
+<h4>Competition data<a class="headerlink" href="#competition-data" title="Lien permanent vers ce titre">#</a></h4>
+<dl>
+<dt><code class="docutils literal notranslate"><span class="pre">info.dat</span></code></dt><dd><p>Informations about competition.</p>
+<p><strong>Format:</strong> Pickle (<code class="docutils literal notranslate"><span class="pre">dict[str,</span> <span class="pre">str]</span></code>)</p>
+<dl class="simple">
+<dt>id</dt><dd><p>Competition ID.</p>
+</dd>
+<dt>type</dt><dd><p>Competition type, like <code class="docutils literal notranslate"><span class="pre">AGI</span></code>.</p>
+</dd>
+<dt>format</dt><dd><p>Competition format, like <code class="docutils literal notranslate"><span class="pre">Concours</span> <span class="pre">Standard</span></code>.</p>
+</dd>
+<dt>day</dt><dd><p>Competition day.</p>
+</dd>
+<dt>club</dt><dd><p>Competition organization club.</p>
+</dd>
+<dt>name</dt><dd><p>Competition name.</p>
+</dd>
+<dt>image</dt><dd><p>Wether if the competition has an image or not.</p>
+</dd>
+</dl>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1234</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AGI"</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">"format"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Concours Standard"</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">"day"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Vendredi 13"</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">"club"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GESC"</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Concours du Samedi"</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
 </div>
-</noscript>
-
-<div id="search-results"></div>
+</dd>
+</dl>
+</section>
+</section>
+</section>
+</section>
 
         </article>
       </div>
@@ -207,7 +258,17 @@
         
         <div class="related-pages">
           
-          
+          <a class="prev-page" href="modules.html">
+              <svg><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Modules</div>
+                
+              </div>
+            </a>
         </div>
         <div class="bottom-of-page">
           <div class="left-details">
@@ -228,20 +289,42 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contenu
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Data model</a><ul>
+<li><a class="reference internal" href="#structure">Structure</a><ul>
+<li><a class="reference internal" href="#user-data">User data</a><ul>
+<li><a class="reference internal" href="#competition-data">Competition data</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
   </div>
-</div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/scripts/furo.js"></script>
-    <script src="_static/translations.js"></script>
-    
-<script src="_static/searchtools.js"></script>
-<script src="_static/language_data.js"></script>
-<script src="searchindex.js"></script></body>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/scripts/furo.js"></script>
+    <script src="../_static/translations.js"></script>
+    </body>
 </html>
