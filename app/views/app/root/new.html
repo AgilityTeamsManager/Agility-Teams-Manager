@@ -1,0 +1,40 @@
+{% extends "templates/app.html" %}
+{% block title %}Importer un concours{% endblock %}
+{% block subtitle %}Vous pourrez lier plusieurs concours après sélection.{% endblock %}
+{% block main %}
+<main>
+ <div class="background border-bottom">
+  <form id="configuration" class="flex row gap padding" method="POST" enctype="multipart/form-data">
+   <div class="image-selector">
+    <label for="image-selector-input">
+     <span class="material-icons">add_photo_alternate</span>
+    </label>
+    <input type="file" id="image-selector-input" name="image" accept="image/png, image/jpeg" />
+   </div>
+   <div class="flex column grow">
+    <input class="grow" type="text" placeholder="Nom du concours" name="name" value="{{ preform_name }}" />
+    <label class="dimmed"><input disabled type="checkbox" />Mode hors ligne</label>
+   </div>
+  </form>
+ </div>
+ {% for month in competitions %}
+  <details>
+   <summary>{{ months[month] }}</summary>
+   <ul class="list interactive">
+    {% for competition in competitions[month] %}
+     <li>
+      <button form="configuration" formaction="/app/new/{{ competition.id }}" title="{{ competition.format }}">
+       <div>{{ competition.type }}</div>
+       <div>
+        <span>{{ competition.club }}</span>
+        <span>{{ competition.day }}</span>
+       </div>
+       <div>{{ competition.region }}</div>
+      </a>
+     </li>
+    {% endfor %}
+   </ul>
+  </details>
+ {% endfor %}
+</main>
+{% endblock %}

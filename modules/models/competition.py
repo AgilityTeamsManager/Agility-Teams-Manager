@@ -47,6 +47,8 @@ class Competition:
         """Competition format, like "Concours standard"."""
         self.day: str = day
         """Competition day."""
+        self.region: str = region
+        """Club's region."""
         self.club: str = club
         """Competition orgnization club."""
         self.configured: bool = False

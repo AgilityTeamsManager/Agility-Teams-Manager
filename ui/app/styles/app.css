@@ -16,59 +16,62 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>. 
  */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Open+Sans&display=swap');
-@import url('/ui/app/styles/loading-bar.css');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Open+Sans&display=swap");
+@import url("/ui/app/styles/loading-bar.css");
 
 :root {
-  font-family: "Open Sans", sans-serif;
+    font-family: "Open Sans", sans-serif;
 }
 
 body {
-  position: absolute;
-  top: 50%; 
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border: 1px solid gray;
-  border-radius: 5px;
-  width: 900px;
-  height: 600px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-flow: column;
+    border: 1px solid gray;
+    border-radius: 5px;
+    width: 900px;
+    height: 600px;
 }
 
 header {
-  display: flex;
-  justify-content: space-between;
-  height: 50px;
-  padding: 5px;
-  border-bottom: 1px solid gray;
+    display: flex;
+    justify-content: space-between;
+    height: 50px;
+    padding: 5px;
+    border-bottom: 1px solid gray;
 }
 
 #title {
-  display: flex;
+    display: flex;
 }
 
 #title .button {
-  font-size: 50px;
-  margin-right: 5px;
+    font-size: 50px;
+    margin-right: 5px;
 }
 
-h1, h2 {
-  font-family: "Open Sans", sans-serif;
-  margin: 0px;
+h1,
+h2 {
+    font-family: "Open Sans", sans-serif;
+    margin: 0px;
 }
-  
+
 h1 {
-  font-size: 20px;
+    font-size: 20px;
 }
 
 h2 {
-  font-size: 15px;
-  color: gray;
+    font-size: 15px;
+    color: gray;
 }
 
 header .button {
-  display: block;
-  height: 50px;
-  font-size: 45px;
+    display: block;
+    height: 50px;
+    font-size: 45px;
 }
 
 /* DEPRECATED: Use components/button */
@@ -112,20 +115,13 @@ header .button .material-icons {
 }*/
 
 main {
-  padding: 5px;
-  height: calc(100% - 70px);
-  overflow-y: auto;
-}
-
-main > * {
-  margin: 3px;
-  overflow-y: auto;
-  overflow-x: hidden;
+    height: 100%;
+    overflow-y: auto;
 }
 
 p {
-  text-align: center;
-  font-family: "Open Sans";
+    text-align: center;
+    font-family: "Open Sans";
 }
 
 /* DEPRECATED: Use components/input instead */
@@ -158,37 +154,38 @@ input:focus {
 }*/
 
 label {
-  font-family: 'Open Sans', sans-serif;
-  cursor: pointer;
-  user-select: none;
+    font-family: "Open Sans", sans-serif;
+    cursor: pointer;
+    user-select: none;
 }
 
 textarea {
-  height: 60px;
+    height: 60px;
 }
 
 form > div {
-  display: flex;
+    display: flex;
 }
 
-form > input, form > textarea {
-  width: calc(100% - 21px);
-  margin: 5px;
+form > input,
+form > textarea {
+    width: calc(100% - 21px);
+    margin: 5px;
 }
 
-form > div input {
-  width: 50%;
-  margin-left: 5px;
-  margin-right: 5px;
-}
+/* form > div input {
+    width: 50%;
+    margin-left: 5px;
+    margin-right: 5px;
+} */
 
 .infobox {
-  background-color: yellow;
-  padding: 5px;
-  border-radius: 5px;
+    background-color: yellow;
+    padding: 5px;
+    border-radius: 5px;
 }
 
-summary {
+/*summary {
   font-family: "Open Sans", none;
   border-bottom: 1px solid gray;
   margin-top: 0px;
@@ -200,50 +197,50 @@ summary {
 
 details {
   margin-bottom: 5px;
-}
+}*/
 
 /* List widget */
 div.list {
-  border: 1px solid gray;
-  border-radius: 5px;
+    border: 1px solid gray;
+    border-radius: 5px;
 }
 
 div.list > a {
-  border-bottom: 1px solid gray;
-  display: flex;
-  padding: 5px;
-  height: 42px;
-  text-decoration: none;
-  color: black;
+    border-bottom: 1px solid gray;
+    display: flex;
+    padding: 5px;
+    height: 42px;
+    text-decoration: none;
+    color: black;
 }
 
 div.list > a > div:nth-child(1) {
-  border: 1px solid gray;
-  border-radius: 5px;
-  width: 40px;
-  height: 40px;
-  background-color: lightgray;
-  text-align: center;
-  line-height: 40px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    width: 40px;
+    height: 40px;
+    background-color: lightgray;
+    text-align: center;
+    line-height: 40px;
 }
 div.list > a > div:nth-child(2) {
-  flex-grow: 1;
-  padding: 0 5px;
+    flex-grow: 1;
+    padding: 0 5px;
 }
 
 div.list > a > div:nth-child(2) > div:nth-child(1) {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 div.list > a > div:nth-child(2) > div:nth-child(2) {
-  color: gray;
-  font-size: 15px;
+    color: gray;
+    font-size: 15px;
 }
 
 div.list > a:last-child {
-  border-bottom: none;
+    border-bottom: none;
 }
 
 div.list > a:hover {
-  background-color: lightgray;
+    background-color: lightgray;
 }

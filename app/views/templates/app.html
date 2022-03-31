@@ -25,18 +25,16 @@
    <link rel="stylesheet" href="/ui/app/styles/app.css" />
    <link rel="stylesheet" href="/ui/app/styles/error.css" />
    <link rel="stylesheet" href="/ui/common/styles/common.css" />
-   <link rel="stylesheet" href="/ui/components/button/styles/button.css" />
-   <link rel="stylesheet" href="/ui/components/input/styles/input.css" />
-   <link rel="stylesheet" href="/ui/components/title/styles/title.css" />
-   <link rel="stylesheet" href="/ui/components/list/styles/list.css" />
+   <link rel="stylesheet" href="/ui/components/styles/components.css" />
    <link rel="manifest" href="/manifest.json" />
    <script src="/ui/app/scripts/error.js" defer></script>
+   <script defer src="/ui/components/image-selector/scripts/preview-image.js"></script>
    {% block link %}{% endblock %}
   </head>
   <body>
    <header>
     <div id="title">
-      {% block return %}<button onclick="history.back()" class="button"><span class="material-icons">arrow_back</span></button>{% endblock %}
+      {% block return %}<button onclick="history.back()" class="button big"><span class="material-icons">arrow_back</span></button>{% endblock %}
     <div>
       <h1>{% block title %}{% endblock %}</h1>
       <h2>{% block subtitle %}{% endblock %}</h2>
@@ -49,7 +47,11 @@
    <div id="loading-bar" hidden>
     <div></div>
    </div>
-   <div id="errors"></div>
+   <div id="errors">
+    {% if message is defined %}
+     <div>{{ message }}</div>
+    {% endif %}
+   </div>
    {% block main %}{% endblock %}
   </body>
  </html>

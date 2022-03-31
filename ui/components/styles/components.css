@@ -1,6 +1,6 @@
-/* Common styles */
+/* Components */
 /*
-Agility Teams Manager - Common styles.
+Agility Teams Manager - Components.
 Copyright (C) 2022  Virinas-code
 
 This program is free software: you can redistribute it and/or modify
@@ -16,11 +16,9 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Open+Sans&display=swap');
-@import url("/ui/common/styles/effects.css");
-@import url("/ui/common/styles/display.css");
-@import url("/ui/common/styles/colors.css");
-
-* {
-    font-family: "Open Sans", sans-serif;
-}
+@import url("/ui/components/button/styles/button.css");
+@import url("/ui/components/details/styles/details.css");
+@import url("/ui/components/input/styles/input.css");
+@import url("/ui/components/list/styles/list.css");
+@import url("/ui/components/title/styles/title.css");
+@import url("/ui/components/image-selector/styles/image-selector.css");

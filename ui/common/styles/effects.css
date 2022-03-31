@@ -18,6 +18,10 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 .dimmed, .dimmed:hover {
-    filter: grayscale(50%) brightness(50%) !important;
+    filter: grayscale(50%) !important;
     cursor: not-allowed;
+}
+
+*.dimmed, .dimmed * {
+    color: gray;
 }

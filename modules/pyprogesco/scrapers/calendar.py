@@ -12,6 +12,8 @@ from bs4 import BeautifulSoup
 from bs4.element import ResultSet, Tag
 from requests import get
 
+from modules.models.competition import Competition
+
 
 class Event:
     """
@@ -61,7 +63,9 @@ class Calendar:
                                                           "Formation": self.list_events("Formation")}"""
         self.events = {"Agility": self.list_events("Agility")}
 
-    def list_events(self, activity: str = None, param_month: int = None) -> dict[int, list[Event]]:
+    def list_events(
+        self, activity: str, param_month: int = None
+    ) -> dict[int, list[Competition]]:
         """
         Lists all incoming events in France.
 
@@ -70,7 +74,7 @@ class Calendar:
         :return: List of events by month.
         :rtype: dict[int, list[Event]]
         """
-        result: dict[int, list[Event]] = {}
+        result: dict[int, list[Competition]] = {}
         months: list[int] = [param_month]
         if not param_month:
             months = range(1, 13)
@@ -81,9 +85,17 @@ class Calendar:
                 logging.debug(f"Loading... {month}/12")
             result[month] = []
             if activity:
-                url: str = "https://sportscanins.fr/calendrier/calendrier.php?codeRegionale=%&Activite=" + activity + "&mois=" + str(month)
+                url: str = (
+                    "https://sportscanins.fr/calendrier/calendrier.php?codeRegionale=%&Activite="
+                    + activity
+                    + "&mois="
+                    + str(month)
+                )
             else:
-                url: str = "https://sportscanins.fr/calendrier/calendrier.php?codeRegionale=%&mois=" + str(month)
+                url: str = (
+                    "https://sportscanins.fr/calendrier/calendrier.php?codeRegionale=%&mois="
+                    + str(month)
+                )
             content: str = get(url).text
             parser: BeautifulSoup = BeautifulSoup(content, features="lxml")
             if parser.find(role="alert"):
@@ -92,16 +104,25 @@ class Calendar:
             table: Tag = parser.find(id="tablecalendrier")  # Extract table
             table.find("tr").extract()  # Remove title line
             for row in table.find_all("tr"):
-                event: Event = Event()
                 cells: ResultSet = row.find_all("td")
-                event.type = cells[1].find("div").text.lstrip("\n").strip()
+                event_type = cells[1].find("div").text.lstrip("\n").strip()
                 main_cell: ResultSet = cells[2].contents
-                event.format = main_cell[2].strip(" -\n")
-                event.day = main_cell[1].text
-                event.region = main_cell[4].lstrip("\n-").strip()
-                event.club = " ".join(main_cell[5].text.lstrip("\n ").replace("\n", "").split())
+                event_format = main_cell[2].strip(" -\n")
+                event_day = main_cell[1].text
+                event_region = main_cell[4].lstrip("\n-").strip()
+                event_club = " ".join(
+                    main_cell[5].text.lstrip("\n ").replace("\n", "").split()
+                )
                 link: ParseResult = urlparse(main_cell[5]["href"])
-                event.id = int(parse_qs(link.query)["IdConcours"][0])
-                result[month].append(event)
+                event_id: int = int(parse_qs(link.query)["IdConcours"][0])
+                competition: Competition = Competition(
+                    event_id,
+                    event_type,
+                    event_format,
+                    event_day,
+                    event_region,
+                    event_club,
+                )
+                result[month].append(competition)
         logging.debug("Loading... Done.")
         return result

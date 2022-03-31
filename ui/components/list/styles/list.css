@@ -35,7 +35,27 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
     gap: 5px;
 }
 
-.list > li > div:nth-child(1) {
+.list > li > a {
+    text-decoration: none;
+    display: flex;
+    gap: 5px;
+    flex-grow: 1;
+    color: black;
+}
+
+.list > li > button {
+    display: flex;
+    gap: 5px;
+    flex-grow: 1;
+    text-align: left;
+    border: none;
+    background-color: unset;
+    font-size: 16px;
+}
+
+.list > li > div:nth-child(1),
+.list > li > a > div:nth-child(1),
+.list > li > button > div:nth-child(1) {
     height: 50px;
     width: 50px;
     border-radius: 50%;
@@ -46,11 +66,25 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
     color: white;
 }
 
-.list > li > div:nth-child(2) {
+.list > li > div:nth-child(2),
+.list > li > a > div:nth-child(2),
+.list > li > button > div:nth-child(2) {
     display: flex;
     flex-flow: column;
+    flex-grow: 1;
 }
 
-.list > li > div:nth-child(2) > span:nth-child(2) {
+.list > li > div:nth-child(2) > span:nth-child(2),
+.list > li > a > div:nth-child(2) > span:nth-child(2),
+.list > li > button > div:nth-child(2) > span:nth-child(2) {
     color: gray;
+}
+
+.list.interactive > li:hover {
+    background-color: lightgray;
+}
+
+.list.interactive > li:active,
+.list.interactive > li:focus {
+    background-color: darkgray;
 }
