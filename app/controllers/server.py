@@ -62,8 +62,6 @@ flask_app.logger = logging.getLogger(__name__)
 flask_app.template_folder = "../views/"
 flask_app.static_folder = "../../data/"  # DEBUG TODO: Remove it
 
-common.data = DataManager()
-
 # Root URL
 flask_app.add_url_rule("/", view_func=index)
 
