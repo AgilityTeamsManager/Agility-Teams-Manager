@@ -56,10 +56,10 @@ class Competition:
         """Competition orgnization club."""
         self.configured: bool = False
         """Wether the event is configured for the data module or not."""
-        self.name: str | None = None
+        self.name: str = ""
         """Competition name. Only available when configured."""
-        self.image: bool = False
-        """Wether the competition has an image or not."""
+        self.image: str = ""
+        """Competition image path."""
 
     @classmethod
     def load(cls, user: str, competition_id: int):
@@ -78,7 +78,7 @@ class Competition:
             "data/" + user + "/" + str(competition_id) + "/info.dat", "br"
         ) as file:
             data: dict[str, str] = pickle.load(file)
-            return cls(
+            instance = cls(
                 int(data["id"]),
                 data["type"],
                 data["format"],
@@ -86,13 +86,15 @@ class Competition:
                 data["region"],
                 data["club"],
             )
+            instance.configure(data["name"], data["image"])
+            return instance
 
-    def configure(self, name: str, image: bool = False) -> None:
+    def configure(self, name: str, image: str = "") -> None:
         """
         Configure for data module.
 
         :param str name: Competition name.
-        :param bool image: Wether the competition has an image or not.
+        :param bool image: Competition image path.
         """
         self.name = name
         self.image = image
@@ -114,11 +116,11 @@ class Competition:
         :param str mail: Competition manager's mail.
         """
         logging.debug("Saving competition %(self.id)s for user %(mail)s")
-        base: str = "data/" + mail + "/" + self.id + "/"
+        base: str = "data/" + mail + "/" + str(self.id) + "/"
         if not os.path.exists(base):
             os.mkdir(base)
         infos: dict[str, str] = {
-            "id": self.id,
+            "id": str(self.id),
             "type": self.type,
             "format": self.format,
             "day": self.day,
