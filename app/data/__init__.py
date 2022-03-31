@@ -19,10 +19,12 @@ import hashlib
 import logging
 import os
 import pickle
+from typing import Optional
 
 import app.data.models as models
 from app.utils import hash_password
 from modules.models.competition import Competition
+from modules.models.user import User
 
 
 class DataManager:
@@ -41,34 +43,34 @@ class DataManager:
         """
         self.users_data: dict[str, str] = {}
         """Raw users data."""
-        self.users: dict[str, models.User] = self.load_users()
+        self.users: dict[Optional[str], Optional[User]] = self.load_users()
         """Users."""
 
-    def load_users(self) -> dict[str, models.User]:
+    def load_users(self) -> dict[Optional[str], Optional[User]]:
         """
         Load users list.
 
         Get data from data/users.dat file and parse it.
 
         :return: List of users.
-        :rtype: list[models.User]
+        :rtype: list[User]
         """
         logging.info("Loading users data...")
         with open("data/users.dat", "br") as file:
             parsed: dict[str, str] = pickle.load(file)
             self.users_data = parsed
-        users: dict[str, models.User] = {}
+        users: dict[Optional[str], Optional[User]] = {}
         for mail, password in parsed.items():
-            user: models.User = models.User(mail, password)
-            path: str = "data/" + mail + "/competitions.dat"
+            user: User = User(mail, password)
+            user.load()
+            """path: str = "data/" + mail + "/competitions.dat"
             competitions: list[int] = pickle.load(open(path, "br"))
             for competition, competition_id in competitions:
                 user.competitions[competition_id] = self.load_competition(
                     mail, competition
-                )
+                )"""
             users[mail] = user
-        self.users = users
-        self.users[None] = None
+        users[None] = None
         logging.info("Loaded users data.")
         return users
 
@@ -83,7 +85,9 @@ class DataManager:
         :return: Competition object.
         :rtype: Competition
         """
-        logging.debug("Loading competition %(id_competition)s for user %(mail)s")
+        logging.debug(
+            "Loading competition %(id_competition)s for user %(mail)s"
+        )
         path: str = "data/" + mail + "/" + str(id_competition) + "/info.dat"
         with open(path, "br") as file:
             data: dict[str, str] = pickle.load(file)

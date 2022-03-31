@@ -16,6 +16,13 @@
 
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
+import logging
+import pickle
+
+from app.utils import hash_password
+from modules.models.competition import Competition
+
+logger: logging.Logger = logging.getLogger("modules.models.user")
 
 
 class User:
@@ -32,3 +39,30 @@ class User:
         """Mail."""
         self.password: str = password
         """Password."""
+        self.competitions: dict[int, Competition] = {}
+        """Competitions."""
+
+    def load(self) -> None:
+        """
+        Loads data from data/ folder.
+
+        Loads competitions of user.
+        """
+        logger.info("User %s: Loading data", self.mail)
+        data_path: str = "data/" + self.mail + "/"
+        with open(data_path + "competitions.dat", "br") as competitions_list:
+            competitions: list[int] = pickle.load(competitions_list)
+            for competition_id in competitions:
+                competition: Competition = Competition.load(
+                    self.mail, competition_id
+                )
+                self.competitions[competition_id] = competition
+
+    def set_password(self, new_password: str) -> None:
+        """
+        Set password.
+
+        :param new_password: New password, not hashed.
+        :type new_password: str
+        """
+        self.password = hash_password(new_password)

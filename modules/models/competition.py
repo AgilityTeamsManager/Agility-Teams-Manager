@@ -21,12 +21,15 @@ import logging
 import os.path
 import pickle
 
+logger: logging.Logger = logging.getLogger("modules.models.competition")
+
 
 class Competition:
     """The competition model."""
 
-    def __init__(self, id: int, type: str, format: str,
-                 day: str, region: str, club: str) -> None:
+    def __init__(
+        self, id: int, type: str, format: str, day: str, region: str, club: str
+    ) -> None:
         """
         Create a new event.
 
@@ -57,6 +60,32 @@ class Competition:
         """Competition name. Only available when configured."""
         self.image: bool = False
         """Wether the competition has an image or not."""
+
+    @classmethod
+    def load(cls, user: str, competition_id: int):
+        """
+        Load competition from user data.
+
+        :param user: User's mail.
+        :type user: str
+        :param competition_id: Competition ID.
+        :type competition_id: int
+        :return: Competition loaded.
+        :rtype: Competition
+        """
+        logger.info("User %s: Loading competition %s", user, competition_id)
+        with open(
+            "data/" + user + "/" + str(competition_id) + "/info.dat", "br"
+        ) as file:
+            data: dict[str, str] = pickle.load(file)
+            return cls(
+                int(data["id"]),
+                data["type"],
+                data["format"],
+                data["day"],
+                data["region"],
+                data["club"],
+            )
 
     def configure(self, name: str, image: bool = False) -> None:
         """
@@ -95,7 +124,7 @@ class Competition:
             "day": self.day,
             "club": self.club,
             "name": self.name,
-            "image": self.image
+            "image": self.image,
         }
         with open(base + "info.dat") as file:
             pickle.dump(infos, file)
