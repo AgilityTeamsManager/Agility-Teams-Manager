@@ -24,7 +24,7 @@ from typing import Optional
 import app.data.models as models
 from app.utils import hash_password
 from modules.models.competition import Competition
-from modules.models.user import User
+from modules.data.models.user import DataUser
 
 
 class DataManager:
@@ -43,32 +43,26 @@ class DataManager:
         """
         self.users_data: dict[str, str] = {}
         """Raw users data."""
-        self.users: dict[Optional[str], Optional[User]] = self.load_users()
+        self.users: dict[Optional[str], Optional[DataUser]] = self.load_users()
         """Users."""
 
-    def load_users(self) -> dict[Optional[str], Optional[User]]:
+    def load_users(self) -> dict[Optional[str], Optional[DataUser]]:
         """
         Load users list.
 
         Get data from data/users.dat file and parse it.
 
         :return: List of users.
-        :rtype: list[User]
+        :rtype: list[DataUser]
         """
         logging.info("Loading users data...")
         with open("data/users.dat", "br") as file:
             parsed: dict[str, str] = pickle.load(file)
             self.users_data = parsed
-        users: dict[Optional[str], Optional[User]] = {}
+        users: dict[Optional[str], Optional[DataUser]] = {}
         for mail, password in parsed.items():
-            user: User = User(mail, password)
+            user: DataUser = DataUser(mail, password)
             user.load()
-            """path: str = "data/" + mail + "/competitions.dat"
-            competitions: list[int] = pickle.load(open(path, "br"))
-            for competition, competition_id in competitions:
-                user.competitions[competition_id] = self.load_competition(
-                    mail, competition
-                )"""
             users[mail] = user
         users[None] = None
         logging.info("Loaded users data.")
@@ -116,7 +110,7 @@ class DataManager:
         """
         logging.info("Creating user %(mail)s" % {"mail": mail})
         hashed_password: str = hashlib.sha256(password.encode()).hexdigest()
-        user: models.User = models.User(mail, hashed_password)
+        user: models.DataUser = models.DataUser(mail, hashed_password)
         path: str = "data/" + mail + "/"
         print(os.getcwd())
         os.mkdir(path)

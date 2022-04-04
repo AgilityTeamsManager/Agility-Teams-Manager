@@ -1,0 +1,11 @@
+{% extends "templates/app.html" %}
+{% block title %}Paramètres{% endblock %}
+{% block subtitle %}{{ current_user.mail }}{% endblock %}
+{% block main %}
+<main class="padding">
+ <a href="/account/delete" class="button small red">
+  <span class="material-icons">delete</span>
+  Supprimer le compte
+ </a>
+</main>
+{% endblock %}

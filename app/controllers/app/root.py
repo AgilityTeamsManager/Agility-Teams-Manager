@@ -53,6 +53,20 @@ def app_root():
     )
 
 
+def app_settings():
+    """
+    User settings.
+
+    Page /app/settings.
+    """
+    return check_auth(
+        render_template(
+            "app/root/settings.html",
+            current_user=app.common.data.users[session.get("auth", None)],
+        )
+    )
+
+
 def app_new():
     """
     New competition page.

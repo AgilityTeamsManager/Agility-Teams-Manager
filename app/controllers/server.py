@@ -42,11 +42,17 @@ from app.env import load_env_from_conf
 
 load_env_from_conf()
 
+from app.controllers.account.delete import account_delete
 from app.controllers.account.login import login
 from app.controllers.account.logout import logout
 from app.controllers.account.reset import reset, reset_password
 from app.controllers.account.signup import signup, signup_confirm
-from app.controllers.app.root import app_new, app_new_competition, app_root
+from app.controllers.app.root import (
+    app_new,
+    app_new_competition,
+    app_root,
+    app_settings,
+)
 from app.controllers.root import index
 from app.controllers.session.session import dev_session, session_join
 from app.controllers.static import public, static_ui
@@ -70,6 +76,9 @@ flask_app.add_url_rule("/public/<path:filename>", view_func=public)
 flask_app.add_url_rule("/ui/<path:filename>", view_func=static_ui)
 
 # Account rules
+# Delete
+flask_app.add_url_rule("/account/delete", view_func=account_delete)
+
 # Login
 flask_app.add_url_rule(
     "/account/login", methods=["GET", "POST"], view_func=login
@@ -97,6 +106,7 @@ flask_app.add_url_rule(
 # App
 # Root
 flask_app.add_url_rule("/app", view_func=app_root)
+flask_app.add_url_rule("/app/settings", view_func=app_settings)
 flask_app.add_url_rule("/app/new", view_func=app_new)
 flask_app.add_url_rule(
     "/app/new/<int:id_competition>",

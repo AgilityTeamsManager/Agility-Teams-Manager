@@ -35,28 +35,13 @@ class User:
         :param str mail: Mail.
         :param str password: Hashed password.
         """
+        logger.info("User %s: Creating with password %s", mail, password)
         self.mail: str = mail
         """Mail."""
         self.password: str = password
         """Password."""
         self.competitions: dict[int, Competition] = {}
         """Competitions."""
-
-    def load(self) -> None:
-        """
-        Loads data from data/ folder.
-
-        Loads competitions of user.
-        """
-        logger.info("User %s: Loading data", self.mail)
-        data_path: str = "data/" + self.mail + "/"
-        with open(data_path + "competitions.dat", "br") as competitions_list:
-            competitions: list[int] = pickle.load(competitions_list)
-            for competition_id in competitions:
-                competition: Competition = Competition.load(
-                    self.mail, competition_id
-                )
-                self.competitions[competition_id] = competition
 
     def set_password(self, new_password: str) -> None:
         """

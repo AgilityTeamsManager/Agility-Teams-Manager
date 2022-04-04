@@ -33,6 +33,10 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
     background-color: white;
     color: black;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
 }
 
 .button > span {
@@ -57,6 +61,24 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
     background-color: green;
 }
 
+.button.red {
+    color: white;
+    background-color: red;
+}
+
+.button.red:hover {
+    filter: brightness(150%);
+}
+
+.button.blue {
+    color: white;
+    background-color: cornflowerblue;
+}
+
+.button.blue:hover {
+    filter: brightness(150%);
+}
+
 /* Big */
 
 .button.big {
@@ -76,6 +98,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
     height: 31px;
     padding: 5px;
     box-sizing: border-box;
+    text-decoration: none;
+    width: 100%;
 }
 
 /* Hover */

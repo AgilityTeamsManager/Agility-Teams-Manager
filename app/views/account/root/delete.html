@@ -1,0 +1,14 @@
+{% extends "templates/small.html" %}
+{% block title %}Suppression du compte{% endblock %}
+{% block subtitle %}Supprimer le compte{% endblock %}
+{% block main %}
+Êtes vous SÛR de vouloir supprimmer le compte {{ user }} ? CETTE ACTION EST IRRÉVERSIBLE !
+<a href="/account/delete/confirm" class="button small red">
+ <span class="material-icons">delete</span>
+ Oui, supprimer le compte
+</a>
+<button onclick="history.back();" class="button small">
+ <span class="material-icons">arrow_back</span>
+ Non, revenir en lieu sûr
+</button>
+{% endblock %}
