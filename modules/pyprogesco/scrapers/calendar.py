@@ -6,13 +6,18 @@ pyprogesco Scrapers - Calendar.
 Parse sportscanins.fr calendar data.
 """
 import logging
+import time
 from urllib.parse import urlparse, parse_qs, ParseResult
 
 from bs4 import BeautifulSoup
 from bs4.element import ResultSet, Tag
 from requests import get
+from verboselogs import VerboseLogger
 
 from modules.models.competition import Competition
+
+
+logger: VerboseLogger = VerboseLogger("modules.pyprogesco.scrapers.calendar")
 
 
 class Event:
@@ -80,9 +85,9 @@ class Calendar:
             months = range(1, 13)
         for month in months:
             if param_month:
-                logging.debug("Loading...")
+                logger.verbose("Calendar: Loading...")
             else:
-                logging.debug(f"Loading... {month}/12")
+                logger.verbose("Calendar: Loading... %s/12", month)
             result[month] = []
             if activity:
                 url: str = (
@@ -96,10 +101,20 @@ class Calendar:
                     "https://sportscanins.fr/calendrier/calendrier.php?codeRegionale=%&mois="
                     + str(month)
                 )
-            content: str = get(url).text
+            while True:
+                try:
+                    content: str = get(url).text
+                    break
+                except ConnectionResetError:
+                    logger.warning("Calendar: Connection reseted")
+                    time.sleep(10)
             parser: BeautifulSoup = BeautifulSoup(content, features="lxml")
             if parser.find(role="alert"):
-                logging.warning(f"No competitions (activity {activity}, month {month})")
+                logger.warning(
+                    "Calendar: No competitions (activity %s, month %s)",
+                    activity,
+                    month,
+                )
                 continue
             table: Tag = parser.find(id="tablecalendrier")  # Extract table
             table.find("tr").extract()  # Remove title line
@@ -124,5 +139,5 @@ class Calendar:
                     event_club,
                 )
                 result[month].append(competition)
-        logging.debug("Loading... Done.")
+        logger.verbose("Calendar: Done.")
         return result

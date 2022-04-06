@@ -23,8 +23,8 @@ from typing import Optional
 
 import app.data.models as models
 from app.utils import hash_password
-from modules.models.competition import Competition
 from modules.data.models.user import DataUser
+from modules.models.competition import Competition
 
 
 class DataManager:

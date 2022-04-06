@@ -16,13 +16,15 @@
 
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
-import logging
 import pickle
 
+from verboselogs import VERBOSE, VerboseLogger
+
+from modules.data.models.competition import DataCompetition
 from modules.models.competition import Competition
 from modules.models.user import User
 
-logger: logging.Logger = logging.getLogger("modules.data.models.user")
+logger: VerboseLogger = VerboseLogger("modules.data.models.user")
 
 
 class DataUser(User):
@@ -30,16 +32,35 @@ class DataUser(User):
 
     def load(self) -> None:
         """
-        Loads data from data/ folder.
+        Load data from data/ folder.
 
-        Loads competitions of user.
+        Load competitions of user.
         """
-        logger.info("User %s: Loading data", self.mail)
+        logger.verbose("User %s: Loading data", self.mail)
         data_path: str = "data/" + self.mail + "/"
         with open(data_path + "competitions.dat", "br") as competitions_list:
             competitions: list[int] = pickle.load(competitions_list)
             for competition_id in competitions:
-                competition: Competition = Competition.load(
+                competition: DataCompetition = DataCompetition.load(
                     self.mail, competition_id
                 )
                 self.competitions[competition_id] = competition
+
+    def save(self):
+        """
+        Save user data to data/.
+
+        Save user data.
+        """
+        logger.verbose("User %s: Saving data", self.mail)
+        data_path: str = "data/" + self.mail + "/"
+        with open(data_path + "competitions.dat", "bw") as competitions_list:
+            competitions: list[int] = []
+            for competition in self.competitions.values():
+                competitions.append(competition.id)
+                competition.save()
+            pickle.dump(competitions, competitions_list)
+
+    def add_competition(self, competition: Competition) -> None:
+        super().add_competition(competition)
+        self.save()

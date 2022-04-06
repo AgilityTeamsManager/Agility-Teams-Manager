@@ -17,6 +17,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 import logging
 from tabnanny import check
+from typing import Optional
 from django.shortcuts import render
 from flask import (
     abort,
@@ -26,6 +27,7 @@ from flask import (
     request,
     session,
 )
+from modules.data.models.user import DataUser
 from modules.models.competition import Competition
 from modules.models.user import User  # TODO: Debug
 
@@ -35,7 +37,7 @@ from modules.pyprogesco.scrapers.calendar import Calendar
 from modules.utils import months
 
 calendar: Calendar = Calendar()
-agility_events: list[Competition] = calendar.list_events("Agility")
+agility_events: dict[int, list[Competition]] = calendar.list_events("Agility")
 logger: logging.Logger = logging.getLogger("app.controllers.app.root")
 
 
@@ -80,7 +82,7 @@ def app_new():
     )
 
 
-def app_new_competition(id_competition):
+def app_new_competition(id_competition: int):
     """
     Add a competition.
 
@@ -97,7 +99,23 @@ def app_new_competition(id_competition):
     file_ext: str = request.files["image"].filename.split(".")[-1]
     if file_ext in ("png", "jpg", "jpeg"):
         # Do stuff
-        print("omg stuff")
+        current_user: Optional[DataUser] = app.common.data.users[
+            session.get("auth", None)
+        ]
+        if current_user:
+            # Find competition
+            selected_competition: Optional[Competition] = None
+            for month in range(1, 13):
+                for competition in agility_events[month]:
+                    if competition.id == id_competition:
+                        selected_competition = competition
+            if not selected_competition:
+                logger.error("COMPETITION NOT FOUND: %s", id_competition)
+                return abort(500)
+            selected_competition.configure(request.form["name"], file_ext)
+            current_user.add_competition(selected_competition)
+        else:
+            return abort(401)
     else:
         flash("Invalid file type", "error")
         logger.error("Invalid file type provided: %s", file_ext)

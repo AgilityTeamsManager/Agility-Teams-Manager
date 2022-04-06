@@ -16,13 +16,12 @@
 
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
-import logging
-import pickle
+from verboselogs import VERBOSE, VerboseLogger
 
 from app.utils import hash_password
 from modules.models.competition import Competition
 
-logger: logging.Logger = logging.getLogger("modules.models.user")
+logger: VerboseLogger = VerboseLogger("modules.models.user")
 
 
 class User:
@@ -35,7 +34,9 @@ class User:
         :param str mail: Mail.
         :param str password: Hashed password.
         """
-        logger.info("User %s: Creating with password %s", mail, password)
+        logger.log(
+            VERBOSE, "User %s: Creating with password %s", mail, password
+        )
         self.mail: str = mail
         """Mail."""
         self.password: str = password
@@ -47,7 +48,19 @@ class User:
         """
         Set password.
 
+        .. warning::
+            This performs hash on password.
+
         :param new_password: New password, not hashed.
         :type new_password: str
         """
         self.password = hash_password(new_password)
+
+    def add_competition(self, competition: Competition) -> None:
+        """
+        Add a configured competition to user.
+
+        :param competition: Competition to add.
+        :type competition: Competition
+        """
+        self.competitions[competition.id] = competition

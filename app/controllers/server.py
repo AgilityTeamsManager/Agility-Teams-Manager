@@ -32,7 +32,7 @@ sys.path.append(os.path.abspath("."))
 os.environ[
     "COLOREDLOGS_LOG_FORMAT"
 ] = "%(asctime)s [%(name)-25s] %(levelname)s %(message)s"
-coloredlogs.install(level=logging.INFO)
+coloredlogs.install(level=15)
 logging.basicConfig(
     format=os.environ["COLOREDLOGS_LOG_FORMAT"], level=logging.DEBUG
 )
