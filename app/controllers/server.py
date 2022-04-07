@@ -126,4 +126,4 @@ flask_app.add_url_rule(
 
 if __name__ == "__main__":
     os.environ["FLASK_ENV"] = "developpement"
-    flask_app.run(host="localhost", port=8080, debug=True)
+    flask_app.run(host="localhost", port=8080, debug=False)

@@ -5,8 +5,10 @@ pyprogesco Scrapers - Calendar.
 
 Parse sportscanins.fr calendar data.
 """
-import logging
+from datetime import date, timedelta
+import json
 import time
+from typing import Union
 from urllib.parse import urlparse, parse_qs, ParseResult
 
 from bs4 import BeautifulSoup
@@ -66,7 +68,69 @@ class Calendar:
                                                           "CAESC": self.list_events("CAESC"),
                                                           "Pass": self.list_events("Pass"),
                                                           "Formation": self.list_events("Formation")}"""
-        self.events = {"Agility": self.list_events("Agility")}
+        #  self.events = {"Agility": self.list_events("Agility")}
+        self.events: dict[str, dict[int, list[Competition]]] = {}
+
+    @classmethod
+    def from_cache(cls, activities: Union[tuple[str], str]):
+        """
+        Load calendar from cache.
+
+        If there is no cache or cache is outdated, it generates a new one.
+
+        :return: New calendar, loaded from cache.
+        :rtype: Calendar
+        """
+        if isinstance(activities, str):
+            activities = (activities,)  # type: ignore
+        now: date = date.today()
+        with open("conf/cache.json") as cache_conf:
+            data: dict[str, dict[str, str]] = json.load(cache_conf)
+        instance: Calendar = cls()
+        for activity in activities:
+            cache_date: date = date.fromisoformat(
+                data["competitions"][activity]
+            )
+            if now - timedelta(3) < cache_date:
+                # OK, on charge
+                logger.verbose("Activity %s: Loading from cache", activity)
+                with open("cache/competitions/" + activity + ".json") as file:
+                    from_cache: dict[
+                        str, list[dict[str, Union[str, int, bool]]]
+                    ] = json.load(file)
+                instance.events[activity] = {}
+                for month in range(1, 13):
+                    instance.events[activity][month] = []
+                    for cached_competition in from_cache[str(month)]:
+                        instance.events[activity][month].append(
+                            Competition.from_dict(cached_competition)
+                        )
+            else:
+                # Cache périmé...
+                # On va load du coup
+                logger.warning(
+                    "Activity %s: Cache outdated, reloading",
+                    activity,
+                )
+                json_data: dict[
+                    str, list[dict[str, Union[str, int, bool]]]
+                ] = {}
+                events: dict[int, list[Competition]] = instance.list_events(
+                    activity
+                )
+                instance.events[activity] = events
+                for month in range(1, 13):
+                    json_data[str(month)] = []
+                    for competition in events[month]:
+                        json_data[str(month)].append(competition.to_dict())
+                with open(
+                    "cache/competitions/" + activity + ".json", "w"
+                ) as json_file:
+                    json.dump(json_data, json_file)
+                data["competitions"]["Agility"] = date.today().isoformat()
+        with open("conf/cache.json", "w") as cache_conf_write:
+            json.dump(data, cache_conf_write)
+        return instance
 
     def list_events(
         self, activity: str, param_month: int = None
@@ -105,7 +169,7 @@ class Calendar:
                 try:
                     content: str = get(url).text
                     break
-                except ConnectionResetError:
+                except ConnectionError:
                     logger.warning("Calendar: Connection reseted")
                     time.sleep(10)
             parser: BeautifulSoup = BeautifulSoup(content, features="lxml")

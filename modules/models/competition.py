@@ -20,6 +20,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 import logging
 import os.path
 import pickle
+from typing import Any, Union
 
 logger: logging.Logger = logging.getLogger("modules.models.competition")
 
@@ -60,3 +61,36 @@ class Competition:
         """Competition name. Only available when configured."""
         self.image: str = ""
         """Competition image extension."""
+
+    def to_dict(self) -> dict[str, Union[str, int, bool]]:
+        """
+        Save object as dict.
+
+        :return: A JSON compatible dict.
+        :rtype: dict[str, Union[str, int, bool]]
+        """
+        return {
+            "id": self.id,
+            "type": self.type,
+            "format": self.format,
+            "day": self.day,
+            "region": self.region,
+            "club": self.club,
+        }
+
+    @classmethod
+    def from_dict(cls, data: dict[str, Any]):
+        """
+        Load competition from dict.
+
+        :param data: Data from :meth:`from_dict`.
+        :type data: dict[str, Union[str, int, bool]]
+        """
+        return cls(
+            data["id"],
+            data["type"],
+            data["format"],
+            data["day"],
+            data["region"],
+            data["club"],
+        )

@@ -36,8 +36,8 @@ from app.controllers.account.auth import check_auth
 from modules.pyprogesco.scrapers.calendar import Calendar
 from modules.utils import months
 
-calendar: Calendar = Calendar()
-agility_events: dict[int, list[Competition]] = calendar.list_events("Agility")
+calendar: Calendar = Calendar.from_cache("Agility")
+agility_events: dict[int, list[Competition]] = calendar.events["Agility"]
 logger: logging.Logger = logging.getLogger("app.controllers.app.root")
 
 

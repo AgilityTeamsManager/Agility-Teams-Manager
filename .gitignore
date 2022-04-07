@@ -144,3 +144,6 @@ conf/app.json
 
 # Not public
 samples/
+
+# Cache
+cache/
