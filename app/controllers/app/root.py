@@ -16,9 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 import logging
-from tabnanny import check
 from typing import Optional
-from django.shortcuts import render
 from flask import (
     abort,
     flash,
