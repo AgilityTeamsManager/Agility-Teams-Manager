@@ -48,6 +48,7 @@ from app.controllers.account.logout import logout
 from app.controllers.account.reset import reset, reset_password
 from app.controllers.account.signup import signup, signup_confirm
 from app.controllers.app.competition.root import app_competition
+from app.controllers.app.competition.manage import app_competition_manage
 from app.controllers.app.root import (
     app_new,
     app_new_competition,
@@ -118,6 +119,11 @@ flask_app.add_url_rule(
 # Competition
 # Root
 flask_app.add_url_rule("/app/<int:id_competition>", view_func=app_competition)
+
+# Manage
+flask_app.add_url_rule(
+    "/app/<int:id_competition>/manage", view_func=app_competition_manage
+)
 
 # Session
 # Dev session

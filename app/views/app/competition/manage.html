@@ -1,0 +1,7 @@
+{% extends "templates/app.html" %}
+{% block button %}<a href="/app/{{ competition.id }}/close" class="button big red"><span class="material-icons">archive</span></a>{% endblock %}
+{% block title %}{{ competition.name }}{% endblock %}
+{% block subtitle %}Gérer les équipes{% endblock %}
+{% block main %}
+{% include "components/team-list.html" %}
+{% endblock %}
