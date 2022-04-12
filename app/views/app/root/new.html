@@ -9,7 +9,7 @@
     <label for="image-selector-input">
      <span class="material-icons">add_photo_alternate</span>
     </label>
-    <input type="file" id="image-selector-input" name="image" accept="image/png, image/jpeg" />
+    <input type="file" id="image-selector-input" name="image" accept="image/png, image/jpeg, image/webp" />
    </div>
    <div class="flex column grow">
     <input class="grow" type="text" placeholder="Nom du concours" name="name" value="{{ preform_name }}" />
@@ -30,7 +30,7 @@
         <span>{{ competition.day }}</span>
        </div>
        <div>{{ competition.region }}</div>
-      </a>
+      </button>
      </li>
     {% endfor %}
    </ul>

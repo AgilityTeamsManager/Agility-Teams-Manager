@@ -18,6 +18,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 @import url("/ui/components/button/styles/button.css");
 @import url("/ui/components/details/styles/details.css");
+@import url("/ui/components/header/header.css");
 @import url("/ui/components/input/styles/input.css");
 @import url("/ui/components/list/styles/list.css");
 @import url("/ui/components/title/styles/title.css");

@@ -47,6 +47,7 @@ from app.controllers.account.login import login
 from app.controllers.account.logout import logout
 from app.controllers.account.reset import reset, reset_password
 from app.controllers.account.signup import signup, signup_confirm
+from app.controllers.app.competition.root import app_competition
 from app.controllers.app.root import (
     app_new,
     app_new_competition,
@@ -114,6 +115,10 @@ flask_app.add_url_rule(
     methods=["POST"],
 )
 
+# Competition
+# Root
+flask_app.add_url_rule("/app/<int:id_competition>", view_func=app_competition)
+
 # Session
 # Dev session
 flask_app.add_url_rule("/dev/session", view_func=dev_session)
@@ -126,4 +131,4 @@ flask_app.add_url_rule(
 
 if __name__ == "__main__":
     os.environ["FLASK_ENV"] = "developpement"
-    flask_app.run(host="localhost", port=8080, debug=False)
+    flask_app.run(host="localhost", port=8080, debug=True)

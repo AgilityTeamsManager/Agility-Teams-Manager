@@ -54,8 +54,29 @@ class DataCompetition(Competition):
                 data["region"],
                 data["club"],
             )
-            instance.configure(data["name"], data["image"])
+            instance.name = data["name"]
+            instance.image = data["image"]
             return instance
+
+    @classmethod
+    def from_competition(cls, competition: Competition, name: str, image: str):
+        """
+        Make data competition from standard competition.
+
+        :param competition: Base competition.
+        :type competition: Competition
+        """
+        instance = cls(
+            competition.id,
+            competition.type,
+            competition.format,
+            competition.day,
+            competition.region,
+            competition.club,
+        )
+        instance.name = name
+        instance.image = image
+        return instance
 
     def save(self, mail: str) -> None:
         """
@@ -72,6 +93,7 @@ class DataCompetition(Competition):
             "type": self.type,
             "format": self.format,
             "day": self.day,
+            "region": self.region,
             "club": self.club,
             "name": self.name,
             "image": self.image,

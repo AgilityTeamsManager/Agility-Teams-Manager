@@ -66,6 +66,14 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
     color: white;
 }
 
+.list > li > div:nth-child(1) > img,
+.list > li > a > div:nth-child(1) > img,
+.list > li > button > div:nth-child(1) > img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
 .list > li > div:nth-child(2),
 .list > li > a > div:nth-child(2),
 .list > li > button > div:nth-child(2) {

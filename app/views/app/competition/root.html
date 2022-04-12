@@ -1,0 +1,27 @@
+{% extends "templates/app.html" %}
+{% block return %}<a href="/app" class="button big"><span class="material-icons">exit_to_app</span></a>{% endblock %}
+{% block button %}<a href="/app/{{ competition.id }}/close" class="button big red"><span class="material-icons">archive</span></a>{% endblock %}
+{% block title %}{{ competition.name }}{% endblock %}
+{% block subtitle %}{{ competition.day }}{% endblock %}
+{% block main %}
+<main class="flex">
+ <div class="background grow">
+  <header class="header">
+   <span><img src="/public/{{ competition.id }}/image.{{ competition.image }}" /></span>
+   <div>
+    <span>{{ competition.name }}</span>
+    <span>{{ competition.day }}</span>
+   </div>
+  </header>
+ </div>
+ <div class="grow padding flex column gap">
+  <button class="button small blue"><span class="material-icons">sync</span>Charger la liste des concurrents</button>
+  <a class="button small blue"><span class="material-icons">send</span>Envoyer les mails</a>
+  <a class="button small blue"><span class="material-icons">format_list_numbered</span>Générer les résultats</a>
+  <details open>
+   <summary>Avancé</summary>
+   <a href="/app/{{ competition.id }}/manage" class="button small blue"><span class="material-icons">groups</span>Gérer les équipes</a>
+  </details>
+ </div>
+</main>
+{% endblock %}

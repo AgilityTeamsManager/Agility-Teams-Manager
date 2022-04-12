@@ -58,9 +58,9 @@ class DataUser(User):
             competitions: list[int] = []
             for competition in self.competitions.values():
                 competitions.append(competition.id)
-                competition.save()
+                competition.save(self.mail)
             pickle.dump(competitions, competitions_list)
 
-    def add_competition(self, competition: Competition) -> None:
+    def add_competition(self, competition: DataCompetition) -> None:
         super().add_competition(competition)
         self.save()

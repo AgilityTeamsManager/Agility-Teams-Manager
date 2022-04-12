@@ -8,4 +8,18 @@
  <a href="/app/new" class="button big green"><span class="material-icons">add</span></a>
 </div>
 {% endblock %}
-{% block main %}Not implemented :({% endblock %}
+{% block main %}
+<ul class="list interactive">
+ {% for competition in current_user.competitions.values() %}
+  <li>
+   <a href="/app/{{ competition.id }}">
+    <div><img src="/public/{{ competition.id }}/image.{{ competition.image }}" /></div>
+    <div>
+     <span>{{ competition.name }}</span>
+     <span>{{ competition.day }}</span>
+    </div>
+   </a>
+  </li>
+ {% endfor %}
+</li>
+{% endblock %}

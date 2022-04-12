@@ -16,6 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 import logging
+import os
 from typing import Optional
 from flask import (
     abort,
@@ -25,6 +26,7 @@ from flask import (
     request,
     session,
 )
+from modules.data.models.competition import DataCompetition
 from modules.data.models.user import DataUser
 from modules.models.competition import Competition
 from modules.models.user import User  # TODO: Debug
@@ -95,7 +97,7 @@ def app_new_competition(id_competition: int):
         + request.files["image"].filename
     )
     file_ext: str = request.files["image"].filename.split(".")[-1]
-    if file_ext in ("png", "jpg", "jpeg"):
+    if file_ext in ("png", "jpg", "jpeg", "webp"):
         # Do stuff
         current_user: Optional[DataUser] = app.common.data.users[
             session.get("auth", None)
@@ -110,8 +112,15 @@ def app_new_competition(id_competition: int):
             if not selected_competition:
                 logger.error("COMPETITION NOT FOUND: %s", id_competition)
                 return abort(500)
-            selected_competition.configure(request.form["name"], file_ext)
-            current_user.add_competition(selected_competition)
+            data_competition: DataCompetition = (
+                DataCompetition.from_competition(
+                    selected_competition, request.form["name"], file_ext
+                )
+            )
+            current_user.add_competition(data_competition)
+            filepath: str = "public/" + str(id_competition) + "/"
+            os.mkdir(filepath)
+            request.files["image"].save(filepath + "image." + file_ext)
         else:
             return abort(401)
     else:
