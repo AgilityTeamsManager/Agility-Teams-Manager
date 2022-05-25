@@ -20,7 +20,9 @@ Login to sportscanins.fr account.
 
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
-from selenium import webdriver
+import os
+
+from selenium.webdriver import Firefox, FirefoxOptions
 from selenium.webdriver.remote.webelement import WebElement
 
 
@@ -36,9 +38,15 @@ class Session:
         :param password: Password.
         :type password: str
         """
-        driver_options: webdriver.FirefoxOptions = webdriver.FirefoxOptions()
+        driver_options: FirefoxOptions = FirefoxOptions()
+        driver_options.binary_location = os.path.abspath(
+            "./lib/firefox/firefox"
+        )
         driver_options.headless = True
-        self.driver = webdriver.Firefox(options=driver_options)
+        os.environ["PATH"] += ":" + os.path.abspath(
+            "./lib/"
+        )  # Add driver to PATH
+        self.driver = Firefox(options=driver_options)
         self.login(username, password)
 
     def login(self, username: str, password: str) -> None:
