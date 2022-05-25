@@ -11,8 +11,9 @@ from bs4 import BeautifulSoup
 from bs4.element import ResultSet, Tag
 from requests import get
 
-from modules.pyprogesco.objects import Concurrent
-
+from modules.models.concurrent import Concurrent
+from modules.models.dog import Dog
+from modules.models.group import Group
 
 
 class OrgaEvent:
@@ -33,7 +34,7 @@ class OrgaEvent:
         """
         self.id_competition: int = id_competition
 
-    def concurrent_list(self, data: BeautifulSoup = None) -> list[Concurrent]:
+    def concurrent_list(self, data: BeautifulSoup) -> list[Group]:
         """
         Get principal concurrents list of event.
 
@@ -48,45 +49,57 @@ class OrgaEvent:
         rows: ResultSet = table.find_all("tr")
         result: list[Concurrent] = []
         for row in rows:
-            concurrent: Concurrent = Concurrent(True)
             cells: ResultSet = row.find_all("td")
             name_cell: list[Tag] = cells[1].contents
             dog: list[str] = name_cell[0].lstrip("\n ").split("[")
-            concurrent.dog = dog[0][:-1]
-            concurrent.dog_fapac = dog[1][:-1]
+            dog_name = dog[0][:-1]
+            dog_fapac = dog[1][:-1]
             dog_infos: list[str] = name_cell[2].lstrip(" ]\t\n").split(" - ")
-            concurrent.dog_category = dog_infos[0]
-            concurrent.dog_race = dog_infos[1]
+            dog_category = dog_infos[0]
+            dog_race = dog_infos[1]
             record: list[str] = name_cell[4].split(" [")
-            concurrent.record = record[0]
-            concurrent.record_id = int(record[1][3:].replace("\t", "").replace("\n", "")[:-2])
-            concurrent.message = cells[1].find("span")
-            if concurrent.message:
-                concurrent.message = concurrent.message.text
+            group_record = record[0]
+            group_record_id = int(
+                record[1][3:].replace("\t", "").replace("\n", "")[:-2]
+            )
+            group_message = cells[1].find("span")
+            if group_message:
+                group_message = group_message.text
             conductor_cell: list[Tag] = cells[2].contents
             name: list[str] = conductor_cell[0].strip(" ]\t\n").split(" [")
-            concurrent.name = name[0]
-            concurrent.license = name[1].strip("\t\n")
-            concurrent.club = conductor_cell[2].strip("\t\n")
-            concurrent.tels: list[str] = conductor_cell[4].strip("\t\n").split(" - ")
-            concurrent.mail: str = conductor_cell[7].text
+            concurrent_name = name[0]
+            concurrent_license = name[1].strip("\t\n")
+            concurrent_club = conductor_cell[2].strip("\t\n")
+            concurrent_tels: list[str] = (
+                conductor_cell[4].strip("\t\n").split(" - ")
+            )
+            concurrent_mail: str = conductor_cell[7].text
             epreuves: list[Tag] = cells[3]
             epreuves_list = []
             for tag in epreuves.contents:
                 if type(tag) != Tag:
                     epreuves_list.append(tag)
             epreuves_list.pop()  # Remove trailing whitespace
-            payement = cells[4].find("form").find("span").find("span")["class"][0]
+            payement = (
+                cells[4].find("form").find("span").find("span")["class"][0]
+            )
             if payement == "iconev":
-                concurrent.payement = "yes"
+                group_payement = "yes"
             elif payement == "iconeo":
-                concurrent.payement = "waiting"
+                group_payement = "waiting"
             elif payement == "iconer":
-                concurrent.payement = "no"
+                group_payement = "no"
             else:
                 print(payement)
-                concurrent.payement = "unknown"
-            print(repr(concurrent.payement))
+                group_payement = "unknown"
+            print(repr(group_payement))
+            concurrent: Concurrent = Concurrent(
+                concurrent_name,
+                concurrent_club,
+                concurrent_tels,
+                concurrent_mail,
+            )
+            dog: Dog = Dog(dog_name, dog_category)
             result.append(concurrent)
         return result
 

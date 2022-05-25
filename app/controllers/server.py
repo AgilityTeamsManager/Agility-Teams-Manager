@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-PROGESCO Teams.
+Agility Teams Manager.
 
 
-Classements par équipe pour PROGESCO.
+Classements par équipe pour sportscanins.fr.
 """
 # Copyright (C) 2022  Virinas-code
 
@@ -49,6 +49,7 @@ from app.controllers.account.reset import reset, reset_password
 from app.controllers.account.signup import signup, signup_confirm
 from app.controllers.app.competition.root import app_competition
 from app.controllers.app.competition.manage import app_competition_manage
+from app.controllers.app.competition.load import app_competition_load
 from app.controllers.app.root import (
     app_new,
     app_new_competition,
@@ -56,7 +57,11 @@ from app.controllers.app.root import (
     app_settings,
 )
 from app.controllers.root import index
-from app.controllers.session.session import dev_session, session_join
+from app.controllers.session.session import (
+    dev_session,
+    session_join,
+    session_new,
+)
 from app.controllers.static import public, static_ui
 from app.data import DataManager
 
@@ -125,9 +130,15 @@ flask_app.add_url_rule(
     "/app/<int:id_competition>/manage", view_func=app_competition_manage
 )
 
+# Load
+flask_app.add_url_rule(
+    "/app/<int:id_competition>/load", view_func=app_competition_load
+)
+
 # Session
 # Dev session
-flask_app.add_url_rule("/dev/session", view_func=dev_session)
+flask_app.add_url_rule("/dev/session/", view_func=dev_session)
+flask_app.add_url_rule("/dev/session/new", view_func=session_new)
 
 # API
 flask_app.add_url_rule(

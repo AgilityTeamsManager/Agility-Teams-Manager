@@ -32,4 +32,4 @@ Controls login, logout and signup.
   
 ### Docs
 
-See [official documentation](https://agilityteamsmanager.github.io/PROGESCO-Teams/developpement/app.html#account) for more infos.
+See [official documentation](https://agilityteamsmanager.github.io/Agility-Teams-Manager/developpement/app.html#account) for more infos.

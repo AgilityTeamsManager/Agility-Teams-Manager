@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "progesco-teams"
+name = "agility-teams-manager"
 version = "0.1.0"
-description = "Classements par équipe pour PROGESCO"
+description = "Classements par équipe pour sportscanins.fr"
 authors = ["Virinas-code <alexcode228@gmail.com>"]
 license = "GPL-3.0-or-later"
 

@@ -19,7 +19,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 .list {
     width: 100%;
-    list-style-type: none;
+    list-style-image: none;
     padding: 0;
     margin: 0;
     border-bottom: 1px solid gray;
@@ -95,4 +95,18 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 .list.interactive > li:active,
 .list.interactive > li:focus {
     background-color: darkgray;
+}
+
+.list > li > div:nth-child(3),
+.list > li > a > div:nth-child(3),
+.list > li > button > div:nth-child(3) {
+    display: flex;
+    flex-flow: column;
+    text-align: right;
+}
+
+.list > li > div:nth-child(3) > span,
+.list > li > a > div:nth-child(3) > span,
+.list > li > button > div:nth-child(3) > span {
+    color: gray;
 }

@@ -45,6 +45,14 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
     flex-flow: column;
 }
 
-.header > div > span:nth-child(2) {
+.header > div:nth-child(2) > span:nth-child(2) {
+    color: gray;
+}
+
+.header > div:nth-child(3) {
+    text-align: right;
+}
+
+.header > div:nth-child(3) > span {
     color: gray;
 }

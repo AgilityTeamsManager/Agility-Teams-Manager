@@ -1,7 +1,7 @@
 {
   "background_color": "#fff",
   "categories": ["sports", "utilities"],
-  "description": "Classements par équipe pour PROGESCO",
+  "description": "Classements par équipe pour sportscanins.fr",
   "dir": "ltr",
   "display": "fullscreen",
   "display_override": ["standalone", "minimal-ui"],
@@ -43,7 +43,7 @@
               }
   ],
   "lang": "fr-FR",
-  "name": "PROGESCO Teams Manager",
+  "name": "Agility Teams Manager",
   "orientation": "portrait",
   "prefer_related_applications": false,
   "related_applications": [
@@ -63,7 +63,7 @@
       "label": "Login screen (still in developpement !)"
     }
   ],
-  "short_name": "PROGESCO Teams",
+  "short_name": "Agility Teams Manager",
   "shortcuts": [
     {
       "name": "Accueil",

@@ -1,0 +1,13 @@
+{% extends "templates/app.html" %}
+{% block title %}Nouvelle équipe{% endblock %}
+{% block main %}
+<div class="grow">
+ <header class="background header">
+  <span>{{ group.dog.category }}{{ group.dog.grade }}</span>
+  <div>
+   <span><input type="text" placeholder="Nom de l'équipe" /></span>
+   <span>{{ group.concurrent.name }}</span>
+  </div>
+ </header>
+</div>
+{% endblock %}

@@ -22,12 +22,28 @@ import pickle
 from verboselogs import VerboseLogger
 
 from modules.models.competition import Competition
+from modules.models.team import Team
 
 logger: VerboseLogger = VerboseLogger("modules.data.models.competition")
 
 
 class DataCompetition(Competition):
     """Competition with data functions."""
+
+    def __init__(
+        self, id: int, type: str, format: str, day: str, region: str, club: str
+    ) -> None:
+        super().__init__(id, type, format, day, region, club)
+        self.teams: dict[str, Team] = {}
+        """Map between team name and team."""
+        self.name: str = ""
+        """Competition name. Only available when configured."""
+        self.image: str = ""
+        """Competition image extension."""
+        self.sessions: dict[str, DataSession] = {}
+        """Competition concurrents' sessions."""
+        self.concurrents: dict[int, Concurrent] = {}
+        """Competition's concurrents."""
 
     @classmethod
     def load(cls, user: str, competition_id: int):
@@ -78,6 +94,12 @@ class DataCompetition(Competition):
         instance.image = image
         return instance
 
+    def to_dict(self) -> dict[str, str]:
+        infos: dict[str, str] = super().to_dict()
+        infos["name"] = self.name
+        infos["image"] = self.image
+        return infos
+
     def save(self, mail: str) -> None:
         """
         Save competition.
@@ -88,15 +110,13 @@ class DataCompetition(Competition):
         base: str = "data/" + mail + "/" + str(self.id) + "/"
         if not os.path.exists(base):
             os.mkdir(base)
-        infos: dict[str, str] = {
-            "id": str(self.id),
-            "type": self.type,
-            "format": self.format,
-            "day": self.day,
-            "region": self.region,
-            "club": self.club,
-            "name": self.name,
-            "image": self.image,
-        }
+        # Save infos
+        infos: dict[str, str] = self.to_dict()
         with open(base + "info.dat", "bw") as file:
             pickle.dump(infos, file)
+        # Save sessions
+        if not os.path.exists(base + "session"):
+            os.mkdir(base + "session")
+
+        for session_id, session in self.sessions.items():
+            session.save(mail, self.id, session_id)

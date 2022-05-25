@@ -1,6 +1,6 @@
-/* Components */
+/* File selector */
 /*
-Agility Teams Manager - Components.
+Agility Teams Manager - Item view.
 Copyright (C) 2022  Virinas-code
 
 This program is free software: you can redistribute it and/or modify
@@ -16,11 +16,6 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
-@import url("/ui/components/button/styles/button.css");
-@import url("/ui/components/details/styles/details.css");
-@import url("/ui/components/header/header.css");
-@import url("/ui/components/input/styles/input.css");
-@import url("/ui/components/list/styles/list.css");
-@import url("/ui/components/title/styles/title.css");
-@import url("/ui/components/image-selector/styles/image-selector.css");
-@import url("/ui/components/file-selector/file-selector.css");
+.file-selector > input {
+    display: none;
+}

@@ -25,11 +25,16 @@ import logging
 from app.mail.gmail import send_mail as gmail_send_mail
 
 
-
-def send_mail(to: str, subject: str, message: str, mail_message: str,
-              redirect: str, button: str) -> None:
+def send_mail(
+    to: str,
+    subject: str,
+    message: str,
+    mail_message: str,
+    redirect: str,
+    button: str,
+) -> None:
     """
-    Send a PROGESCO Teams mail.
+    Send a Agility Teams Manager mail.
 
     :param str to: Destination address.
     :param str subject: Mail subject.
@@ -41,15 +46,22 @@ def send_mail(to: str, subject: str, message: str, mail_message: str,
     :rtype: None
     """
     logging.debug("Sending email to %(to)s")
-    mail: email.mime.multipart.MIMEMultipart = email.mime.multipart.MIMEMultipart("alternative")
+    mail: email.mime.multipart.MIMEMultipart = (
+        email.mime.multipart.MIMEMultipart("alternative")
+    )
     mail["Subject"] = subject
-    mail["From"] = "PROGESCO Teams<progesco.teams@gmail.com>"
+    mail["From"] = "Agility Teams Manager<progesco.teams@gmail.com>"
     mail["To"] = to
-    mail.attach(email.mime.text.MIMEText(message.format(redirect=redirect), "plain"))
+    mail.attach(
+        email.mime.text.MIMEText(message.format(redirect=redirect), "plain")
+    )
     with open("app/frontend/mail.html") as file_object:
-        mail_html: str = file_object.read().replace("@message", mail_message) \
-                                           .replace("@link", redirect) \
-                                           .replace("@button", button)
+        mail_html: str = (
+            file_object.read()
+            .replace("@message", mail_message)
+            .replace("@link", redirect)
+            .replace("@button", button)
+        )
         mail.attach(email.mime.text.MIMEText(mail_html, "html"))
     gmail_send_mail("progesco.teams@gmail.com", to, mail)
 

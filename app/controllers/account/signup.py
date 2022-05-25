@@ -35,7 +35,9 @@ def signup_confirm(id_confirm: uuid.UUID):
     """
     entry: dict[str, str] = signups[str(id_confirm)]
     if entry["user"] in common.data.users:
-        return render_template("login.html", error=f"Le compte {entry['user']} existe dèjà.")
+        return render_template(
+            "login.html", error=f"Le compte {entry['user']} existe dèjà."
+        )
     common.data.add_user(entry["user"], entry["password"])
     return redirect("/account/login?message=Inscription réussie")
 
@@ -47,14 +49,23 @@ def signup():
     Page /account/signup, methods POST.
     """
     if request.form["user"] in common.data.users:
-        return render_template("login.html", error=f"Le compte {request.form['user']} existe dèjà.")
+        return render_template(
+            "login.html",
+            error=f"Le compte {request.form['user']} existe dèjà.",
+        )
     random_uuid: str = str(uuid.uuid4())
-    signups[random_uuid] = {"user": request.form["user"],
-                            "password": request.form["password"]}
-    send_mail(request.form["user"],
-              "PROGESCO Teams: Confirmer l'inscription",
-              "Ouvrez le lien suivant pour confirmer votre inscription : {redirect}",
-              "Pour finaliser la création de votre compte sur PROGESCO Teams, cliquez sur le boutton 'Confirmer l'inscription' ou ouvrez le lien suivant : @link.",
-              request.url_root + "account/signup/" + random_uuid,
-              "Confirmer l'inscription")
-    return render_template("account/common/mail_received.html", mail_address=request.form["user"])
+    signups[random_uuid] = {
+        "user": request.form["user"],
+        "password": request.form["password"],
+    }
+    send_mail(
+        request.form["user"],
+        "Agility Teams Manager: Confirmer l'inscription",
+        "Ouvrez le lien suivant pour confirmer votre inscription : {redirect}",
+        "Pour finaliser la création de votre compte sur Agility Teams Manager, cliquez sur le boutton 'Confirmer l'inscription' ou ouvrez le lien suivant : @link.",
+        request.url_root + "account/signup/" + random_uuid,
+        "Confirmer l'inscription",
+    )
+    return render_template(
+        "account/common/mail_received.html", mail_address=request.form["user"]
+    )

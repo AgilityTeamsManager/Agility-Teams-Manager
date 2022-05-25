@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Dog model."""
-# Agility Teams Manager - Dog model.
+"""Extended sessions model with data functions."""
+# Agility Teams Manager - Teams ranking in agility competitions
 # Copyright (C) 2022  Virinas-code
 
 # This program is free software: you can redistribute it and/or modify
@@ -16,23 +16,3 @@
 
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
-
-class Dog:
-    def __init__(self, name: str, race: str, category: str, grade: int):
-        """
-        A dog.
-
-        :param str name: Name.
-        :param str race: Dog race.
-        :param str category: Category (A-D).
-        :param int grade: Grade (1-3).
-        """
-        self.name: str = name
-        """Name."""
-        self.race: str = race
-        """Race. """
-        self.category: str = category
-        """Category."""
-        self.grade: int = grade
-        """Grade."""

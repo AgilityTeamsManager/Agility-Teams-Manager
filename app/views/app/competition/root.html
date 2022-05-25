@@ -12,16 +12,18 @@
     <span>{{ competition.name }}</span>
     <span>{{ competition.day }}</span>
    </div>
+   <div>
+    <span>{{ competition.club }}</span>
+    <span>{{ competition.format }}</span>
+   </div>
   </header>
  </div>
  <div class="grow padding flex column gap">
-  <button class="button small blue"><span class="material-icons">sync</span>Charger la liste des concurrents</button>
+  <a class="button small blue" href="/app/{{ competition.id }}/load"><span class="material-icons">sync</span>Charger la liste des concurrents</a>
   <a class="button small blue"><span class="material-icons">send</span>Envoyer les mails</a>
   <a class="button small blue"><span class="material-icons">format_list_numbered</span>Générer les résultats</a>
-  <details open>
-   <summary>Avancé</summary>
-   <a href="/app/{{ competition.id }}/manage" class="button small blue"><span class="material-icons">groups</span>Gérer les équipes</a>
-  </details>
+  <h4>Avancé</h4>
+  <a href="/app/{{ competition.id }}/manage" class="button small blue"><span class="material-icons">groups</span>Gérer les équipes</a>
  </div>
 </main>
 {% endblock %}

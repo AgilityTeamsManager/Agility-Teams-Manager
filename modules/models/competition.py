@@ -55,14 +55,8 @@ class Competition:
         """Club's region."""
         self.club: str = club
         """Competition orgnization club."""
-        self.configured: bool = False
-        """Wether the event is configured for the data module or not."""
-        self.name: str = ""
-        """Competition name. Only available when configured."""
-        self.image: str = ""
-        """Competition image extension."""
 
-    def to_dict(self) -> dict[str, Union[str, int, bool]]:
+    def to_dict(self) -> dict[str, str]:
         """
         Save object as dict.
 
@@ -70,7 +64,7 @@ class Competition:
         :rtype: dict[str, Union[str, int, bool]]
         """
         return {
-            "id": self.id,
+            "id": str(self.id),
             "type": self.type,
             "format": self.format,
             "day": self.day,

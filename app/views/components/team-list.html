@@ -1,6 +1,9 @@
 <link rel="stylesheet" href="/ui/session/styles/ctv.css" />
 <link rel="stylesheet" href="/ui/session/styles/item-view.css" />
 <script defer src="/ui/session/scripts/ctv.js"></script>
+{% if teams is not defined %}
+ {% set teams = competition.teams.values() %}
+{% endif %}
 <ctv>
  <ctv-search>
   <input type="search" placeholder="Rechercher une équipe, un concurrent..." />

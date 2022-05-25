@@ -1,0 +1,12 @@
+{% extends "templates/app.html" %}
+{% block link %}
+<script>let competitionId = {{ competition.id }}</script>
+<script defer src="/ui/app/competition-load/scripts/load-list.js"></script>
+{% endblock %}
+{% block title %}{{ competition.name }}{% endblock %}
+{% block subtitle %}Chargement des concurrents{% endblock %}
+{% block main %}
+<form method="POST" action="">
+ <label for="concurrents-list" class="file-selector button small"><input type="file" name="concurrents-list" id="concurrents-list" /> Charger la liste des concurrents</label>
+</form>
+{% endblock %}
