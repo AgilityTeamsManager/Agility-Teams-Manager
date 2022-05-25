@@ -47,6 +47,12 @@ Calendar
 .. automodule:: modules.pyprogesco.scrapers.calendar
     :members:
 
+Session
+-------
+
+.. automodule:: modules.pyprogesco.session
+    :members:
+
 Models
 ======
 
