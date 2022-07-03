@@ -42,7 +42,7 @@ class Session:
         driver_options.binary_location = os.path.abspath(
             "./lib/firefox/firefox"
         )
-        driver_options.headless = True
+        # driver_options.headless = True
         os.environ["PATH"] += ":" + os.path.abspath(
             "./lib/"
         )  # Add driver to PATH
