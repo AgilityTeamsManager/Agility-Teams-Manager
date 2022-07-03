@@ -81,7 +81,7 @@ class Competition:
         :type data: dict[str, Union[str, int, bool]]
         """
         return cls(
-            data["id"],
+            int(data["id"]),
             data["type"],
             data["format"],
             data["day"],

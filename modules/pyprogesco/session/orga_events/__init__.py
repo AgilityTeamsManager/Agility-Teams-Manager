@@ -41,7 +41,7 @@ class OrgaEvents:
         :param driver: Driver logged in.
         :type driver: Firefox
         """
-        logger.verbose("ORGA Events: Loading events")
+        logger.verbose("Loading events")
         self.driver: Firefox = driver
         """Logged in driver."""
         self.current_events, self.past_events = self.load_events()
@@ -54,7 +54,7 @@ class OrgaEvents:
         :return: Events, sorted by ID.
         :rtype: dict[int, Event]
         """
-        logger.verbose("ORGA Events: Loading events list")
+        logger.verbose("Loading events list")
         self.driver.get(
             "https://sportscanins.fr/calendrier/mon_espace_cneac.php"
         )

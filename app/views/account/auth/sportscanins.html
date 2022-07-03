@@ -1,0 +1,11 @@
+{% extends "templates/small.html" %}
+{% block title %}Se connecter à sportscanins.fr{% endblock %}
+{% block subtitle %}Connexion{% endblock %}
+{% block main %}
+<p>Connectez-vous à votre compte sportscanins.fr pour continuer</p>
+<form action="" method="post" autocomplete="off">
+ <input type="email" placeholder="Adresse mail" autocomplete="off" />
+ <input type="password" placeholder="Mot de passe" autocomplete="off" />
+ <input type="submit" class="button small blue" value="Se connecter avec sportscanins.fr" />
+</form>
+{% endblock %}

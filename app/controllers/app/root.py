@@ -107,7 +107,7 @@ def app_new_competition(id_competition: int):
             selected_competition: Optional[Competition] = None
             for month in range(1, 13):
                 for competition in agility_events[month]:
-                    if competition.id == id_competition:
+                    if int(competition.id) == id_competition:
                         selected_competition = competition
             if not selected_competition:
                 logger.error("COMPETITION NOT FOUND: %s", id_competition)

@@ -21,6 +21,7 @@ Classements par équipe pour sportscanins.fr.
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 import logging
+from operator import methodcaller
 import os
 import sys
 
@@ -42,6 +43,7 @@ from app.env import load_env_from_conf
 
 load_env_from_conf()
 
+from app.controllers.account.oauth import oauth
 from app.controllers.account.delete import account_delete
 from app.controllers.account.login import login
 from app.controllers.account.logout import logout
@@ -108,6 +110,11 @@ flask_app.add_url_rule(
     "/account/reset/<uuid:id_reset>",
     view_func=reset_password,
     methods=["GET", "POST"],
+)
+
+# OAuth
+flask_app.add_url_rule(
+    "/account/auth", view_func=oauth, methods=["GET", "POST"]
 )
 
 # App
