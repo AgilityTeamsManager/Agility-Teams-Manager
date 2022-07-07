@@ -19,6 +19,18 @@
             ],
             "jinja": true,
             "justMyCode": true
+        },
+        {
+            "name": "Launch localhost",
+            "type": "firefox",
+            "request": "launch",
+            "firefoxExecutable": "/usr/lib/firefox-developer/firefox2/firefox",
+            "reAttach": true,
+            "url": "http://127.0.0.1:5000/account/login",
+            "pathMappings": [{
+                "url": "http://127.0.0.1:5000",
+                "path": "${workspaceFolder}"
+            }]
         }
     ]
 }
