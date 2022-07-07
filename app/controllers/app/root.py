@@ -118,7 +118,9 @@ def app_new_competition(id_competition: int):
                 )
             )
             current_user.add_competition(data_competition)
-            filepath: str = "public/" + str(id_competition) + "/"
+            filepath: str = (
+                "public/" + session["auth"] + "/" + str(id_competition) + "/"
+            )
             os.mkdir(filepath)
             request.files["image"].save(filepath + "image." + file_ext)
         else:

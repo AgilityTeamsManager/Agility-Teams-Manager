@@ -30,5 +30,5 @@ def oauth():
     Page /account/auth, methods GET and POST.
     """
     if request.method == "POST":
-        
+        print("hry")
     return render_template("account/auth/sportscanins.html")
